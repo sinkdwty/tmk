@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjzddata.modular.task.dao.PolicyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hjzddata.modular.task.model.Policy">
+        <id column="id" property="id" />
+        <result column="policy_name" property="policyName" />
+        <result column="policy_key" property="policyKey" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="status" property="status" />
+        <result column="is_del" property="isDel" />
+    </resultMap>
+
+    <sql id="Table_Name">
+        hj_policy
+    </sql>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, policy_name AS policyName, policy_key AS policyKey, note, created_at AS createdAt, updated_at AS updatedAt, status, is_del AS isDel
+    </sql>
+
+    <select id="selectPolicies" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+        select
+        <include refid="Base_Column_List" />
+        from
+        <include refid="Table_Name" />
+        where is_del = 0
+        <if test="name != null and name != ''">
+            and (policy_name like CONCAT('%',#{name},'%'))
+        </if>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (created_at between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        order by created_at DESC
+    </select>
+
+    <select id="getByName" resultType="policy">
+        select
+        <include refid="Base_Column_List" />
+        from
+        <include refid="Table_Name" />
+        where policyName = #{name} and is_del != 1
+    </select>
+
+    <update id="setStatus">
+		update
+        <include refid="Table_Name" />
+		set status = #{status}
+        where id =#{policyId}
+	</update>
+
+
+    <select id="policyExistence" resultType="policy">
+        select id,policy_name
+        from
+        <include refid="Table_Name" />
+        where policy_name = #{policyName}  and is_del != 1
+        <if test = "id != null and id != ''">
+            and id != #{id}
+        </if>
+    </select>
+
+</mapper>

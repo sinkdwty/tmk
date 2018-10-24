@@ -1,0 +1,56 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>策略管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12 layui-form custom-input">
+                        <div class="layui-form-item ">
+                            <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                                <label class="layui-form-label" style="width: 100px">策略名称</label>
+                                <div class="layui-input-block">
+                                    <input class="layui-input" maxlength="50" name="name" id="name" placeholder="策略名称" style="width: 118px">
+                                </div>
+                            </div>
+                            <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                                <label class="layui-form-label" style="padding-left: 0">创建时间</label>
+                                <div class="layui-input-inline ">
+                                    <input type="text" name="beginTime" id="beginTime" placeholder="开始时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                                    <span class="layui-col-md1plus">-</span>
+                                    <input type="text" name="endTime" id="endTime" placeholder="结束时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="clear: both;text-align: center">
+                            <div>
+                                <button class=" layui-btn search-btn layui-btn-sm" table-id="policyTable" data-type="reload" lay-filter="UserSearch">
+                                    <i class="fa fa-search" style="font-size: 12px !important;"> </i>查询
+                                </button>
+                                <button class="layui-btn layui-btn-primary layui-btn-sm" id="searchReset" data-type="reset">重置</button>
+
+                                <button class="layui-btn layui-bg-green layui-btn-sm" id="create-policy">新建策略</button>
+                            </div>
+                        </div>
+                    <!--<#table id="PolicyTable"/>-->
+                        <table class="layui-hide" id="policyTable" lay-filter="policy"></table>
+                        <script type="text/html" id="operation">
+                            <button class="layui-btn layui-btn-xs" lay-event="edit">修改</button>
+                            <button class="layui-btn layui-btn-danger  layui-btn-xs" lay-event="delete">删除</button>
+                            {{# if(d.status == 0 ) { }}
+                            <button class="layui-btn layui-btn-xs" lay-event="unfreeze">启用</button>
+                            {{# } else { }}
+                            <button class="layui-btn  layui-btn-warm layui-btn-xs" lay-event="freezeAccount">禁用</button>
+                            {{# } }}
+                        </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="${ctxPath}/static/js/plugins/datapicker/bootstrap-datepicker.js?v=3.3.6"></script>
+<script src="${ctxPath}/static/modular/task/policy/policy.js"></script>
+@}

@@ -1,0 +1,251 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="customForm">
+            <div class="layui-row layui-col-space20">
+                <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block" style="margin-left: 6px;">
+                            <#input id="phone" name="<i style='color:red'>*</i> 手机号码" underline="false"/>
+                            <input type="hidden" value="" id="custom_id"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-btn-container m-20 layui-col-md-offset1" style="">
+                    <a class="layui-btn layui-btn-sm" id="dial" style="margin-left: 10px;" from="new_add">
+                        <i class="iconfont icon-dh"></i> 拨打
+                    </a>
+                    <a class="layui-btn layui-btn-sm" id="take-call-0" from="new_add">
+                        <i class="iconfont icon-dh"></i> +0拨
+                    </a>
+                    <a class="layui-btn layui-btn-danger no-border btn-hangup layui-btn-sm">挂断</a>
+                    <a class="layui-btn layui-btn-normal no-border btn-hold layui-btn-sm">保持</a>
+                    <a class="layui-btn layui-btn-primary no-border layui-btn-sm sp-btn">通话时间<span class="callTime">00:00:00</span></a>
+                </div>
+            </div>
+            <blockquote class="layui-elem-quote title-quote">基本信息</blockquote>
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#input id="customName" name="姓名" underline="true"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#input id="email" name="邮箱" underline="true"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#select name="性别" underline="true" id="sex">
+                            <option value="" selected>请选择</option>
+                            <option value="男" >男</option>
+                            <option value="女" >女</option>
+                        </#select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#select name="客户学历" underline="true" lay-filter='call-select' id="customEducationBackground">
+                            <option value="" selected>请选择</option>
+                            <option value="硕士及以上" >硕士及以上</option>
+                            <option value="本科" >本科</option>
+                            <option value="大专" >大专</option>
+                            <option value="高中/技校/中专" >高中/技校/中专</option>
+                            <option value="初中及以下" >初中及以下</option>
+                        </#select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#input id="graduateSchool" name="毕业院校" underline="true"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#input id="jobCity" name="工作城市" underline="true"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#input id="companyName" name="公司名称" underline="true"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#input id="jobType" name="工作类型" underline="true"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#input id="cardBank" name="持卡行" underline="true"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#input id="applyCardType" name="申请卡种" underline="true"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#input id="dataChannel" name="数据渠道" underline="true"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#input id="dataBatch" name="数据批次" underline="true"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#input id="otherCustomers" name="他有客群" underline="true"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#select name="是否持有他行卡" underline="true"  lay-filter='call-select' id="havingOtherCard">
+                            <option value="" selected>请选择</option>
+                            <option value="是" >是</option>
+                            <option value="否" >否</option>
+                        </#select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#select name="卡片使用时间" underline="true"  lay-filter='call-select' id="cardUseTime">
+                            <option value="" selected>请选择</option>
+                            <option value="半年" >半年</option>
+                            <option value="1年" >1年</option>
+                            <option value="2年及以上" >2年及以上</option>
+                        </#select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#select name="是否企业主股东" underline="true"  lay-filter='call-select' id="isCorporateShareholders">
+                            <option value="" selected>请选择</option>
+                            <option value="是" >是</option>
+                            <option value="否" >否</option>
+                        </#select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 10px;">
+                        <#input id="convenientTime" name="方便联系方式" underline="true"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" >
+                <div class="col-sm-4">
+                    <#textarea name="备注" class="form-control" id="note" underline="false" rows="1"></#textarea>
+                </div>
+            </div>
+
+            <blockquote class="layui-elem-quote title-quote">致电结果</blockquote>
+            <form class="layui-form m-20 " id="call_status_handle" lay-filter="callStatus"   action="">
+            <div class="layui-form-item" style="margin-bottom: 0;">
+                    <!-- add by eric 2018-09-14 start -->
+                    <div class="layui-row">
+                        <div class="base-info layui-col-xs12 layui-col-sm12 layui-col-md12">
+                            <div class="layui-form-item" style="margin-left: 35px;">
+                                <label class="layui-form-label">致电结果</label>
+                                <div class="layui-input-inline" id="notop" style="margin-left: 10px;">
+                                    <select name="call_status_top" lay-verify="required" lay-search lay-filter='call-select' id="call_status_top">
+                                        <option value="">-- 请选择 --</option>
+                                        @for(item in callList){
+                                        <option value="${item.id}">${item.name}</option>
+                                        @}
+                                    </select>
+                                </div>
+                                <div class="layui-input-inline call_status_Div" style="margin-right: 0;display: block">
+                                    <select name="call_status_id" lay-verify="required" lay-search lay-filter='call-again'   id="call_status_id">
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="base-info layui-col-xs6 layui-col-sm6 layui-col-md6 reserveDiv" style="display: none">
+                            <div class="layui-form-item" style="margin-left: 35px;">
+                                <label class="layui-form-label">预约时间</label>
+                                <div class="layui-input-block " style="margin-left: 110px !important;">
+                                    <input type="text" name="reserve_time" class="layui-input" style="width: 180px;" id="reserveTime" placeholder="请选择预约时间">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="base-info layui-col-xs12 layui-col-sm12 layui-col-md12">
+                            <div class="layui-form-item"  style="margin-left: 35px;">
+                                <label class="layui-form-label">电话小结</label>
+                                <div class="layui-input-block" style="margin-left: 110px !important;">
+                                    <textarea name="call_note" id="phoneNote" placeholder="请填写电话小结" class="layui-textarea"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- add by eric 2018-09-14 start -->
+                </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-12" style="text-align: center">
+                    <button class="layui-btn layui-btn-sm" id="ensure" onclick="CustomInfoDlg.addSubmit()">提交</button>
+                    <button class="layui-btn layui-btn-sm layui-btn-primary" id="cancel" onclick="CustomInfoDlg.close()">取消</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/custom/custom/custom_info.js"></script>
+<script src="${ctxPath}/static/modular/custom/custom/detail.js"></script>
+<script src="${ctxPath}/static/modular/custom/custom/custom.js?v=123"></script>
+@}

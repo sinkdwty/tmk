@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjzddata.modular.task.dao.SpeechcraftMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hjzddata.modular.task.model.Speechcraft">
+        <id column="id" property="id" />
+        <result column="contents" property="contents" />
+        <result column="note" property="note" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="status" property="status" />
+        <result column="is_del" property="isDel" />
+    </resultMap>
+
+    <sql id="Table_Name">
+        hj_speechcraft
+    </sql>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, contents, note, created_at AS createdAt, updated_at AS updatedAt, status, is_del AS isDel
+    </sql>
+
+    <sql id="Select_Column_List">
+        id,contents
+    </sql>
+
+    <select id="selectSpeechs" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+        select
+        <include refid="Base_Column_List" />
+        from
+        <include refid="Table_Name" />
+        where is_del = 0
+        <if test="name != null and name != ''">
+            and (contents like CONCAT('%',#{name},'%'))
+        </if>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (created_at between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        order by created_at DESC
+    </select>
+
+    <select id="getByName" resultType="policy">
+        select
+        <include refid="Base_Column_List" />
+        from
+        <include refid="Table_Name" />
+        where policyName = #{name} and is_del != 1
+    </select>
+
+    <update id="setStatus">
+        update
+        <include refid="Table_Name" />
+        set status = #{status}
+        where id =#{speechId}
+    </update>
+
+    <select id="selectList" resultType="Map">
+		select
+		<include refid="Select_Column_List" />
+		from
+        <include refid="Table_Name" />
+        where status = 1 and is_del = 0
+	</select>
+
+</mapper>

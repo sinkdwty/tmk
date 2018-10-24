@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjzddata.modular.custom.dao.SendMailLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hjzddata.modular.custom.model.SendMailLog">
+        <id column="id" property="id" />
+        <result column="custom_id" property="customId" />
+        <result column="custom_name" property="customName" />
+        <result column="user_id" property="userId" />
+        <result column="user_name" property="userName" />
+        <result column="email_address" property="emailAddress" />
+        <result column="result" property="result" />
+        <result column="send_time" property="sendTime" />
+        <result column="create_ip" property="createIp" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, custom_id, custom_name, user_id, user_name, email_address, result, send_time, create_ip
+    </sql>
+
+</mapper>

@@ -1,0 +1,8 @@
+# AutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.hjzddata.core.base.controller.GlobalController,\
+com.hjzddata.core.config.DefaultFastjsonConfig,\
+com.hjzddata.core.config.MultiDataSourceConfig,\
+com.hjzddata.core.config.SingleDataSourceConfig,\
+com.hjzddata.core.config.DefaultProperties,\
+com.hjzddata.core.config.DefaultWebConfig

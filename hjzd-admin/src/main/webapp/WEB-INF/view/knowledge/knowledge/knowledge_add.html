@@ -1,0 +1,53 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="knowledgeInfoForm">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="name" name="<i style='color: red'>*</i> 知识名称" underline="true"/>
+                            <#input id="keyWord" name="关键词" underline="true" placeholder="多个关键词英文逗号,隔开"/>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">附件</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="accessory" name="accessory" type="hidden">
+                            <button type="button" class="btn btn-primary " id="uploadAccessory">
+                                <i class="fa fa-upload"></i>&nbsp;附件&nbsp;(pdf,doc格式)
+                            </button>
+                            <span id="show_file"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                            <!--<#input id="category" name="知识分类" underline="true"/>-->
+                    <#dictSelector id="category" name ="category" code="knowledge"  label="<i style='color: red'>*</i> 知识分类"  underline="true" placeholder="-请选择-" />
+
+                    <#select id="status" name="知识状态" underline="true" >
+                        <option value="1">发布</option>
+                        <option value="0" selected>未发布</option>
+                    </#select>
+                </div>
+                <div class="col-sm-11" style="margin-left: 9%;">
+                    <script id="editor" type="text/plain" style="height:300px;margin: 0 auto;"></script>
+                </div>
+            </div>
+
+
+            <div class = "row btn-group-m-t">
+                <div class="col-sm-12" style="text-align:center">
+
+
+                    <button class="layui-btn layui-btn-sm" id="ensure" onclick="KnowledgeInfoDlg.addSubmit()">提交</button>
+                    <button class="layui-btn layui-btn-sm layui-btn-primary" id="cancel" onclick="KnowledgeInfoDlg.close()">取消</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/js/ueditor/ueditor.config.js"></script>
+<script src="${ctxPath}/static/js/ueditor/ueditor.all.min.js"></script>
+<script src="${ctxPath}/static/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script src="${ctxPath}/static/modular/knowledge/knowledge/knowledge_info.js"></script>
+@}

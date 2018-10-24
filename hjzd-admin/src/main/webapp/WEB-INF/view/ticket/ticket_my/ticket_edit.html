@@ -1,0 +1,142 @@
+@layout("/common/_container.html"){
+<style>
+    .layui-form-item .layui-form-label {
+        padding: 6px 0px;
+    }
+    div.tagsinput {
+        border: 1px solid #CCC;
+        background: #FFF;
+        padding: 5px;
+        width: 100%;
+        height: 100px;
+        overflow-y: auto;
+    }
+    #tags_tagsinput {
+        width: 415px !important;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>${ticket.title}</h5>
+            </div>
+            <div class="ibox-content">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><i style='color: red'>*</i> 主题：</label>
+                        <div class="layui-input-block">
+                            <input class="layui-input" name="title" id="title" placeholder="" value="${ticket.title}" lay-verify="required" />
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">描述：</label>
+                        <div class="layui-input-block">
+                            <textarea class="layui-textarea" id="content" style="display: none">
+                              ${ticket.content}
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">附件：</label>
+                        <div class="layui-input-block">
+                            <a class="layui-btn layui-btn-primary layui-btn-sm" id="file">选择文件</a>（单个附件大小不可超过20M,全部附件大小不可超过20M）
+                            <br>
+                            <div id="fileList"></div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="width: 525px">
+                        <label class="layui-form-label"><i style='color: red'>*</i> 所属公司：</label>
+                        <div class="layui-input-block">
+                            <select name="assignDeptId" id="assignDeptId" lay-verify="required" lay-search="" lay-filter="assignDeptId" >
+                                <option value="">请选择</option>
+                                @for(item in depts){
+                                <option value="${item.id}">${item.fullname}</option>
+                                @}
+                            </select>
+                            <input type="hidden" name="assignDeptName" id="assignDeptName" value="${ticket.assignDeptName}">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><i style='color: red'>*</i> 客户：</label>
+                        <div class="layui-input-block">
+                            <input class="layui-input" name="customName" id="customName"
+                                   placeholder="" value="${ticket.customName}"
+                                   lay-verify="required" style="float: left;width: 360px;margin-right: 10px" readonly/>
+                            <input type="hidden" name="customId" id="customId" value="${ticket.customId}">
+                            <button class="layui-btn layui-btn-sm layui-btn-default" id="selectCustomId">选择</button>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="width: 525px">
+                        <label class="layui-form-label"><i style='color: red'>*</i> 状态：</label>
+                        <div class="layui-input-block">
+                            <select name="status" id="status" lay-verify="required" lay-search="" >
+                                <option value="">请选择</option>
+                                <option value="1">开启</option>
+                                <option value="2">解决中</option>
+                                <option value="3">已解决</option>
+                                <option value="4">已关闭</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><i style='color: red'>*</i> 受理人：</label>
+                        <div class="layui-input-block">
+                            <input class="layui-input" name="assignUserName" id="assignUserName"
+                                   placeholder="" value="${ticket.assignUserName}"
+                                   lay-verify="required" style="float: left;width: 360px;margin-right: 10px" readonly/>
+                            <input type="hidden" name="assignUserId" id="assignUserId" value="${ticket.assignUserId}">
+                            <button class="layui-btn layui-btn-sm layui-btn-default" id="selectUserId">选择</button>
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="width: 525px">
+                        <label class="layui-form-label"><i style='color: red'>*</i> 优先级：</label>
+                        <div class="layui-input-block">
+                            <select name="levels" id="levels" lay-verify="required" lay-search="">
+                                <option value="">请选择</option>
+                                <option value="1">紧急</option>
+                                <option value="2">高</option>
+                                <option value="3">普通</option>
+                                <option value="4">低</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">关注人：</label>
+                        <div class="layui-input-block">
+                            <input class="layui-input" name="followNames" id="followNames"
+                                   placeholder="" value="${ticket.followNames}" style="float: left;width: 360px;margin-right: 10px" readonly/>
+                            <input type="hidden" name="follows" id="follows" value="${ticket.follows}">
+                            <button class="layui-btn layui-btn-sm layui-btn-default" id="selectFollows">选择</button>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">标签：</label>
+                        <div class="layui-input-block">
+                            <input class="layui-input" name="tags" id="tags" placeholder="" value="${ticket.tags}"/>
+                        </div>
+                    </div>
+                    <div style="clear: both;text-align: center">
+                        <div>
+                            <input hidden name="id" value="${ticket.id}">
+                            <button class="layui-btn layui-bg-green layui-btn-sm" lay-submit lay-filter="edit" id="edit">提交</button>
+                            <button class="layui-btn layui-btn-primary layui-btn-sm" type="reset">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="btn-pick" style="display: none"></div>
+<script>
+    var assignDeptId = '${ticket.assignDeptId}';
+    var accessory = '${ticket.accessory}';
+
+    $("#levels").val(${ticket.levels});
+    $("#status").val(${ticket.status});
+    $("#assignDeptId").val(${ticket.assignDeptId});
+
+</script>
+<script type="text/javascript" src="${ctxPath}/static/modular/ticket/ticket_my/ticket_edit.js"></script>
+@}

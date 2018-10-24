@@ -1,0 +1,35 @@
+@layout("/common/_container.html"){
+<style>
+    .layui-form-item .layui-form-label {
+        padding: 6px 0px;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="layui-card">
+            <div class="layui-card-header">
+                <a class="layui-btn layui-btn-sm" id="upload"><i class="layui-icon">&#xe67c;</i>选择文件</a>
+                <a class="layui-btn layui-btn-sm" id="import"><i class="layui-icon">&#xe67c;</i>开始导入</a>
+                <a style="margin-left: 10px; text-decoration: underline" href="/custom/download-tpl?fileName=ticket_import.xls&type=ticket">没有上传的模版？点击下载模版</a>
+            </div>
+            <div class="layui-card-body">
+                系统仅支持 xls、xlsx 格式，单个附件大小不可超过20M,全部附件大小不可超过20M
+            </div>
+            <div id="fileList" style="margin-left: 20px"></div>
+            <br>
+        </div>
+        <blockquote class="layui-elem-quote tips">
+            xls模板使用引导：<br>
+            1、适用范围：本模板适用于批量导入工单。<br>
+            2、模板第一行列名不要随意修改，否则可能会上传失败。<br>
+            3、表格中“客户姓名”和“手机号码”不能为空,“手机号码”必须是11位的数字。<br>
+        </blockquote>
+    </div>
+</div>
+<div id="btn-pick" style="display: none"></div>
+<link href="${ctxPath}/static/js/layui/lay/modules/formSelects-v4.css" rel="stylesheet">
+<script type="text/javascript" src="${ctxPath}/static/js/plugins/xlsx/shim.js"></script>
+<script type="text/javascript" src="${ctxPath}/static/js/plugins/xlsx/xlsx.full.min.js"></script>
+<script type="text/javascript" src="${ctxPath}/static/modular/ticket/ticket/ticket_import.js"></script>
+@}

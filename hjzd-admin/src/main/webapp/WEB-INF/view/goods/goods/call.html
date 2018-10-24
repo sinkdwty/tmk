@@ -1,0 +1,46 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javacript:;">呼叫系统</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="navbar-form navbar-left">
+                    <div class="form-group">
+                        呼叫号码
+                        <input type="text"  id="dial_telNumber" 	class="form-control" placeholder="呼叫号码" name="phone"/>
+                        <#dictSelector id="callSystemId" name ="callSystemId" code="call_system"  label="* 外呼系统"  underline="true" placeholder="-请选择-" />
+                        业务编号
+                        <input type="text" id="dial_bizId" 		class="form-control" placeholder="业务编号"/>
+                    </div>
+                    <button id="dial_test" type="button"  class="btn btn-default">呼叫<i id="call_time"></i></button>
+                    <button id="hangup" type="button"  class="btn btn-default btn-hangup">挂断</button>
+                    <!--<button id="hold" type="button"  class="btn btn-default">保持</button>
+                    转接号码
+                    <input type="text" id="transfer_num" class="form-control" placeholder="转接号码"/>
+                    <button type="button" id="transfer"   class="btn btn-default">转接</button>
+                    <button type="button" class="btn btn-default" id="pullCdr">话单</button>-->
+                </div>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+<script src="${ctxPath}/static/modular/goods/goods/goods.js"></script>
+<script src="${ctxPath}/static/js/call-system.js"></script>
+<!--<script src="${ctxPath}/static/js/makecall/js/callCenter.js"></script>-->
+<!--&lt;!&ndash;<script src="${ctxPath}/static/js/makecall/js/configs.js"></script>&ndash;&gt;-->
+<!--<script src="${ctxPath}/static/js/makecall/js/CE.js"></script>-->
+<!--<script src="${ctxPath}/static/js/makecall/js/CJI.js"></script>-->
+<!--<script>-->
+@}

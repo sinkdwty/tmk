@@ -1,0 +1,62 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>角色管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+
+
+
+                        <div class="layui-form global m-top-20 title-sorts">
+                            <div class="layui-row height-container">
+                                <div class="layui-col-xs12 layui-col-sm6 layui-col-md4" style="min-width: 25%;">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label" style="width: 100px">角色名称:</label>
+                                        <div class="layui-input-block">
+                                            <input class="layui-input" maxlength="50" name="role_name" id="role_name" placeholder="请输入角色名称">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row">
+                                <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-hide-md">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label"></label>
+                                        <div class="load-more layui-input-block">更多查询条件<i class="layui-icon">&#xe625;</i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row tc">
+                                <div class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="text-align: center">
+                                    <button class=" layui-btn search-btn layui-btn-sm" table-id="roleTable" data-type="reload"
+                                            lay-filter="RoleSearch">
+                                        <i class="fa fa-search" style="font-size: 12px !important;"> </i>查询
+                                    </button>
+                                    <button class="layui-btn layui-btn-primary layui-btn-sm" id="searchReset" data-type="reset">重置</button>
+                                    <button class="layui-btn layui-bg-green layui-btn-sm" id="create-role">创建角色</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="layui-hide" id="roleTable" lay-filter="demo"></table>
+
+                        <script type="text/html" id="operation">
+                            <button class="layui-btn layui-btn-xs" lay-event="edit">修改</button>
+                            <button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</button>
+                            <button class="layui-btn layui-btn-xs" lay-event="assign">权限配置</button>
+                        </script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="${ctxPath}/static/modular/system/role/role.js"></script>
+
+@}

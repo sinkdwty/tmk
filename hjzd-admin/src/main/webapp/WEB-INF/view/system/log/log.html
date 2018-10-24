@@ -1,0 +1,108 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>业务日志</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <form class="layui-form">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">操作人</label>
+                                <div class="layui-input-inline">
+                                    <input class="layui-input" id="userName" maxlength="20" placeholder="请输入操作人姓名"/>
+                                </div>
+
+                                <label class="layui-form-label">日志名称</label>
+                                <div class="layui-input-inline">
+                                    <input class="layui-input" id="logName" maxlength="20" placeholder="请输入日志名称"/>
+                                </div>
+
+                                <div class="layui-inline resetInput">
+                                    <label class="layui-form-label" style="padding-left: 0">创建时间</label>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="text" name="beginTime" id="beginTime" placeholder="开始时间" autocomplete="off" class="layui-input">
+                                    </div>
+                                    <div class="layui-form-mid">-</div>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <input type="text" name="endTime" id="endTime" placeholder="结束时间" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline resetInput">
+                                    <label class="layui-form-label">日志类型</label>
+                                    <div class="layui-input-inline">
+                                        <select id="logType">
+                                            <option value="0">全部</option>
+                                            <option value="1">业务日志</option>
+                                            <option value="2">异常日志</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+
+
+                        <!--<div class="row">-->
+                            <!--<div class="col-sm-2">-->
+                                <!--<#NameCon id="userName" name="操作人" />-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-2">-->
+                                <!--<#TimeCon id="beginTime" name="开始时间" isTime="true" pattern="YYYY-MM-DD" />-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-2">-->
+                                <!--<#TimeCon id="endTime" name="结束时间" isTime="ture" pattern="YYYY-MM-DD" />-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-2">-->
+                                <!--<#NameCon id="logName" name="日志名称" />-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-2">-->
+                                <!--<#SelectCon id="logType" name="日志类型" >-->
+                                    <!--<option value="0">全部</option>-->
+                                    <!--<option value="1">业务日志</option>-->
+                                    <!--<option value="2">异常日志</option>-->
+                                <!--</#SelectCon>-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-2">
+                                <#button name="搜索" icon="fa-search" clickFun="OptLog.search()"/>
+                                <#button name="重置" icon="fa-power-off" clickFun="OptLog.reset()"/>
+                            </div>-->
+                        </div>
+                    <div style="clear: both;text-align: center">
+                        <div>
+                            <button class=" layui-btn layui-btn-sm  btn-search" table-id="ticketTable" data-type="reload" lay-filter="ticketTable">
+                                <i class="fa fa-search" style="font-size: 12px !important;"> </i>查询
+                            </button>
+                            <button class="layui-btn layui-btn-primary layui-btn-sm" id="searchReset" data-type="reset">重置</button>
+                        </div>
+                    </div>
+                        <div class="hidden-xs" id="OptLogTableToolbar" role="group">
+                            <!--<#button name="查看详情" icon="fa-plus" clickFun="OptLog.detail()"/>-->
+                            @if(shiro.hasPermission("/log/delLog")){
+                                <!--<#button name="清空日志" icon="fa-plus" clickFun="OptLog.delLog()" space="true"/>-->
+                            <button class="layui-btn layui-bg-green layui-btn-sm" id="upload-custom" onclick="OptLog.delLog()">清空日志</button>
+                            @}
+                        </div>
+                        <!--<#table id="OptLogTable"/>-->
+                    </div>
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <table class="layui-hide" id="managerTable" lay-filter="logs"></table>
+                                <script type="text/html" id="operation">
+                                    <button class="layui-btn layui-btn-xs" lay-event="detail">详情</button>
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/log/log.js"></script>
+@}

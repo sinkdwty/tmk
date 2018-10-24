@@ -1,0 +1,36 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal"  id="callConfigForm">
+
+            <div class="row">
+                <div class="col-sm-12">
+                            <!--<#input id="baseName" name="* 基地名称" underline="true"/>-->
+                    <#input id="baseName" name="<i style='color: red'>*</i> 公司名称" underline="true" readonly="readonly" hidden="baseId"
+                    clickFun="CallConfigInfoDlg.showDeptSelectTree(); return false;"
+                    style="background-color: #ffffff !important;"/>
+                            <#dictSelector id="callSystemId" name ="callSystemId" code="call_system"  label="<i style='color: red'>*</i> 外呼系统"  underline="true" placeholder="-请选择-" />
+                            <#input id="config" name="<i style='color: red'>*</i> 外呼配置" placeholder="actercc接口地址|项目唯一标识|用户组ID|录音账号|密码   例:192.168.8.151|astercc|2|1001|123456"/>
+                </div>
+
+            </div>
+
+            <!-- 这是部门选择的下拉框 -->
+            <div id="menuContent" class="menuContent"
+                 style="display: none; position: absolute; z-index: 200;">
+                <ul id="treeDemo" class="ztree tree-box" style="width: 249px !important;"></ul>
+            </div>
+            <div class="row btn-group-m-t">
+                <div class="col-sm-12" style="text-align: center">
+                    <button class="layui-btn layui-btn-sm" id="ensure" onclick="CallConfigInfoDlg.addSubmit()">提交</button>
+                    <button class="layui-btn layui-btn-sm layui-btn-primary" id="cancel" onclick="CallConfigInfoDlg.close()">取消</button>
+                    <!--<#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="CallConfigInfoDlg.addSubmit()"/>-->
+                    <!--<#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="CallConfigInfoDlg.close()"/>-->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/callConfig/callConfig_info.js"></script>
+@}

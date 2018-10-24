@@ -1,0 +1,84 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>登录日志</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <form class="layui-form custom-input">
+                            <div class="layui-form-item">
+                                <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                                    <label class="layui-form-label" style="padding-left: 0">日志名称</label>
+                                    <div class="layui-input-inline">
+                                        <input class="layui-input" id="logName" maxlength="20" placeholder="请输入日志名称"/>
+                                    </div>
+                                </div>
+                                <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                                    <label class="layui-form-label" style="padding-left: 0">用户账号</label>
+                                    <div class="layui-input-inline">
+                                        <input class="layui-input" id="account" maxlength="20" placeholder="请输入用户账号"/>
+                                    </div>
+                                </div>
+                                <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                                    <label class="layui-form-label" style="padding-left: 0">创建时间</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" name="beginTime" id="beginTime" placeholder="开始时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                                        <span class="layui-col-md1plus">-</span>
+                                        <input type="text" name="endTime" id="endTime" placeholder="结束时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+
+
+                        <!--<div class="row">-->
+                            <!--<div class="col-sm-3">-->
+                                <!--<#TimeCon id="beginTime" name="开始时间" isTime="false" pattern="YYYY-MM-DD" />-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-3">-->
+                                <!--<#TimeCon id="endTime" name="结束时间" isTime="false" pattern="YYYY-MM-DD" />-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-3">-->
+                                <!--<#NameCon id="logName" name="日志名称" />-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-3">-->
+                                <!--<#NameCon id="account" name="用户账号" />-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;<div class="col-sm-3">-->
+                                <!--<#button name="搜索" icon="fa-search" clickFun="LoginLog.search()"/>-->
+                            <!--</div>&ndash;&gt;-->
+                        <!--</div>-->
+                        <div style="clear: both;text-align: center">
+                            <div>
+                                <button class=" layui-btn layui-btn-sm  btn-search" table-id="ticketTable" data-type="reload" lay-filter="ticketTable">
+                                    <i class="fa fa-search" style="font-size: 12px !important;"> </i>查询
+                                </button>
+                                <button class="layui-btn layui-btn-primary layui-btn-sm" id="searchReset" data-type="reset">重置</button>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="LoginLogTableToolbar" role="group">
+                            <!--<#button name="清空日志" icon="fa-plus" clickFun="LoginLog.delLog()"/>-->
+                            <button class="layui-btn layui-bg-green layui-btn-sm" id="upload-custom" onclick="LoginLog.delLog()">清空日志</button>
+                        </div>
+                        <!--<#table id="LoginLogTable"/>-->
+                    </div>
+                    <div class="row row-lg">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12">
+                                    <table class="layui-hide" id="managerTable" lay-filter="logs"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/log/login_log.js?v=1.0"></script>
+@}

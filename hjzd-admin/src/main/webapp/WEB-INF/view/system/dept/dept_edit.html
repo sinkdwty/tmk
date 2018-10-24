@@ -1,0 +1,86 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <form class="layui-form">
+            <div class="form-horizontal" id="deptInfoForm">
+
+                <input type="hidden" name="id" id="id" value="${dept.id}">
+
+                <div class="row">
+                    <div class="col-sm-6 ">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"><i style='color: red'>*</i> 公司名称</label>
+                            <div class="layui-input-block">
+                                <input id="simplename" name="simplename" placeholder="请输入公司名称" value="${dept.simplename}" class="layui-input" lay-verify="required"/>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"><i style='color: red'>*</i> 公司全称</label>
+                            <div class="layui-input-block">
+                                <input id="fullname" name="fullname" placeholder="请输入公司全称" value="${dept.fullname}" class="layui-input" lay-verify="required"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">排序</label>
+                            <div class="layui-input-block">
+                                <input type="number" id="num" name="num" placeholder="请输入排序" value="${dept.num}" class="layui-input"/>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"><i style='color: red'>*</i> 上级</label>
+                            <div class="layui-input-block">
+                                <input id="pName" name="pName" readonly="readonly"
+                                       value="${pName}"
+                                       onclick="DeptInfoDlg.showDeptSelectTree(); return false;"
+                                       style="background-color: #ffffff !important;"
+                                       class="layui-input"
+                                       placeholder="请选择上级"
+                                       lay-verify="required"/>
+                                <input type="hidden" id="pid" name="pid" value="${dept.pid}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"><i style='color: red'>*</i> 外呼系统</label>
+                            <div class="layui-input-block">
+                                <select name="callSystemId" id="callSystemId" lay-verify="required" lay-search="" lay-filter="callSystemId" >
+                                    <option value="">请选择</option>
+                                    @for(item in callSystem){
+                                    <option value="${item.code}">${item.name}</option>
+                                    @}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">备注</label>
+                            <div class="layui-input-block">
+                                <textarea id="tips" name="tips"  placeholder="请输入备注" class="layui-textarea">${dept.tips}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 父级公司的选择框 -->
+                <div id="parentDeptMenu" class="menuContent"
+                     style="display: none; position: absolute; z-index: 200;">
+                    <ul id="parentDeptMenuTree" class="ztree tree-box" style="width: 245px !important;"></ul>
+                </div>
+
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10" style="text-align: center">
+                        <button id="ensure" class="layui-btn layui-bin-sm" lay-submit lay-filter="edit">提交</button>
+                        <button id="cancel" onclick="DeptInfoDlg.close()" class="layui-btn layui-bin-sm layui-btn-primary" >取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $('#callSystemId').val('${dept.callSystemId}');
+</script>
+<script src="${ctxPath}/static/modular/system/dept/dept_info.js"></script>
+@}

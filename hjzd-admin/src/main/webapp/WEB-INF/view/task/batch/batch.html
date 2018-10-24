@@ -1,0 +1,54 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>数据批次管理</h5>
+            </div>
+            <div class="ibox-content">
+                <form class="layui-form custom-input">
+                    <div class="layui-form-item ">
+                        <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                            <label class="layui-form-label" style="width: 100px">批次编号</label>
+                            <div class="layui-input-block">
+                                <input class="layui-input" maxlength="50" name="batch_no" id="batch_no" placeholder="批次编号" style="width: 118px">
+                            </div>
+                        </div>
+                        <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                            <label class="layui-form-label" style="padding-left: 0">创建时间</label>
+                            <div class="layui-input-inline ">
+                                <input type="text" name="beginTime" id="beginTime" placeholder="开始时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                                <span class="layui-col-md1plus">-</span>
+                                <input type="text" name="endTime" id="endTime" placeholder="结束时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both;text-align: center">
+                        <div>
+                            <button class=" layui-btn search-btn layui-btn-sm" table-id="userTable" data-type="reload" lay-filter="UserSearch">
+                                <i class="fa fa-search" style="font-size: 12px !important;"> </i>查询
+                            </button>
+                            <button class="layui-btn layui-btn-primary layui-btn-sm reset-btn" data-type="reset">重置</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <table class="layui-hide" id="batchTable" lay-filter="batch"></table>
+                                <script type="text/html" id="operation">
+                                    <button class="layui-btn layui-btn-xs" lay-event="export-custom">导入</button>
+                                    <button class="layui-btn layui-btn-xs" lay-event="download">下载</button>
+                                    <!--<button class="layui-btn layui-btn-danger  layui-btn-xs" lay-event="delete">删除</button>-->
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/task/batch/batch.js"></script>
+@}

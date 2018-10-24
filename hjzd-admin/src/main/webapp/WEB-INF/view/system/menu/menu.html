@@ -1,0 +1,67 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>菜单管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+
+                                <div class="layui-form global m-top-20 title-sorts">
+                                    <div class="layui-row height-container">
+                                        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3" style="min-width: 25%;">
+                                            <div class="layui-form-item">
+                                                <div class="layui-input-inline" style="width: 100px;">
+                                                    <select name="key" lay-filter="key" id="search_column">
+                                                        <option value="name" selected>菜单名称</option>
+                                                        <option value="code" >菜单编号</option>
+                                                    </select>
+                                                </div>
+                                                <div class="layui-input-block">
+                                                    <input class="layui-input" maxlength="50" name="name" id="menuName" placeholder="请输入菜单名称/菜单编号">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3" style="min-width: 25%;">
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label" style="width: 100px" >层级:</label>
+                                                <div class="layui-input-block">
+                                                    <input class="layui-input glyphicon-calendar" name="levels" id="menuLevels" placeholder="请输入层级">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="layui-row tc">
+                                        <div class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="text-align: center">
+                                            <button class=" layui-btn search-btn layui-btn-sm" table-id="menuTable" data-type="reload"
+                                                    lay-filter="MenuSearch">
+                                                <i class="fa fa-search" style="font-size: 12px !important;"> </i>查询
+                                            </button>
+                                            <button class="layui-btn layui-btn-primary layui-btn-sm" id="searchReset" data-type="reset">重置</button>
+                                            <button class="layui-btn layui-bg-green layui-btn-sm" id="create-menu">添加菜单</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                        <table class="layui-hide" id="menuTable" lay-filter="demo"></table>
+                        <script type="text/html" id="operation">
+                            <button class="layui-btn layui-btn-xs edit" lay-event="edit">修改</button>
+                            <button class="layui-btn layui-btn-xs layui-btn-danger delete"  lay-event="delete">删除</button>
+                        </script>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="${ctxPath}/static/modular/system/menu/menu.js?v=1.1"></script>
+@}

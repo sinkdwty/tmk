@@ -1,0 +1,455 @@
+@layout("/common/_container.html"){
+<link href="${ctxPath}/static/css/detail/detail.css" rel="stylesheet">
+<style>
+    .layui-table-page {
+        position:fixed;
+    }
+    .layui-table-page>div {
+        float: left;
+    }
+    * {
+        box-sizing: content-box;
+    }
+    .layui-form-label {
+        padding: 6px 0 !important;
+    }
+    .layui-input-block {
+        margin-left: 95px !important;
+    }
+    #notop {
+        margin-left: 15px;
+    }
+    .layui-btn-container .layui-btn {
+        margin-bottom: 0;
+        margin-left: 25px;
+    }
+    .layui-tab-content {
+        padding: 10px 0 !important;
+    }
+    .base-title {
+        font-size: 18px;
+        color: #009688;
+        margin: 20px 0;
+    }
+    .base-info-container {
+        padding-left: 15px;
+    }
+    .base-info-container span {
+        margin: 5px 5px 10px 0;
+        display: inline-block;
+        color: #009688;
+    }
+    .base-info-container span.sp-span {
+        margin: 5px 5px 10px 30px;
+    }
+    .submit-user {
+        margin-left: 0 !important;
+        margin-top: 20px;
+        width: 100% !important;
+        text-align: center;
+    }
+    a.sp-btn {
+        border-color: #009688;
+        color: #009688;
+        cursor: inherit;
+    }
+    a.sp-btn:hover, a.sp-btn:focus{
+        text-decoration: none;
+        color: #009688;
+    }
+
+    .label-w-75 {
+        width: 75px;
+    }
+    .db-container {
+        margin-left: 65px !important;
+    }
+    .db-container input {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        /*padding-left: 0 !important;*/
+    }
+    span.layui-badge.hover-div {
+        display: none;
+        position: absolute;
+        z-index: 3;
+        padding: 0;
+        margin-left: 65px;
+        margin-top: -40px;
+        width: 100%;
+    }
+    span.layui-badge.hover-div i.close-tip{
+        color: #FF5722;
+        margin-left: 10px;
+        vertical-align: -2px;
+    }
+    #detail-form div {
+        margin-bottom:0px !important;
+        height: 30px !important;
+        line-height: 22px !important;
+    }
+
+    .form-selelct {
+        margin-left: 65px !important;
+    }
+
+    div.tagsinput span.tag {
+        height: 20px;
+        padding: 2px;
+        line-height: 13px;
+    }
+    div.tagsinput {
+        padding-bottom: 5px;
+        overflow-y: hidden;
+    }
+    .isShow {display: none;}
+</style>
+<div class="wapper wapper-content">
+    <div class="taskDataDetail ">
+        <div class="layui-row layui-col-space20">
+            <div class="layui-col-xs12 layui-col-sm12 layui-col-md6 container-user-info">
+                <!--客户信息表格开始-->
+                <blockquote class="layui-elem-quote title-quote">客户信息
+                    <button class="layui-btn  layui-btn-warm  layui-btn-xs next-case" data-type = "nextCase" style="float: right;display: inline-block">下一位客户</button>
+                </blockquote>
+                <div style="border: 0;height: 18px;line-height: 18px;font-size:12px;color: #666; margin:10px 0px;"><i style="color: red">*</i> 双击可编辑客户资料</div>
+                <input type="hidden" value="${item.id}" id="custom_id"/>
+                <div  class="layui-row base-info-container">
+                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12" >
+                        <form class="layui-form" action="" id="detail-form">
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>姓名</span></label>
+                                    <div class="layui-input-block db-container">
+                                        <input type="text" name="custom_name" value="${item.customName}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>联系方式</span></label>
+                                    <div class="layui-input-block db-container">
+                                        <input type="text" name="phone" value="" title="" class="layui-input no-b" readonly>
+                                        <input type="hidden" id="tele_phone" value="${item.phone}" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>邮箱</span></label>
+                                    <div class="layui-input-block db-container">
+                                        <input type="text" name="email" value="${item.email}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>来源</span></label>
+                                    <div class="layui-input-block db-container">
+                                        <input type="text" name="custom_source" value="${item.customSource}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>拨打日期</span></label>
+                                    <div class="layui-input-block db-container">
+                                        <input type="text" name="first_contact_time" value="${item.firstContactTime,'yyyy-MM-dd HH:mm:ss'}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            @include("/custom/custom/aq-detail.html"){}
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-85 tl" style="padding: 0 !important;"><span>手机号码归属地</span></label>
+                                    <div class="layui-input-block db-container" style="margin-left: 100px !important;">
+                                        <input type="text" name="address" value="${item.address}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <input type="hidden" name="id" id="customId" value="${item.id}">
+                        <div class="layui-form">
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md12">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>客户备注</span></label>
+                                    <div class="layui-input-block form-selelct">
+                                        <input type="hidden" id="old_note" value="${item.note}">
+                                        <textarea name="note" placeholder="请输入内容" class="layui-textarea" id="customNote" style="min-height: 50px;margin-top: 10px">${item.note}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form">
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md12">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>客户标签</span></label>
+                                    <div class="layui-input-block form-selelct">
+                                        <textarea name="label" placeholder="请输入内容" class="layui-textarea" id="customTags" style="min-height: 50px;">${item.label}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="layui-form">-->
+                        <!--<div class="layui-row">-->
+                            <!--<div class="layui-form-item">-->
+                                <!--<label class="layui-form-label label-w-65 tl">简历分类</label>-->
+                                <!--<div class="layui-input-inline">-->
+                                    <!--<select name="custom_status" lay-verify="required" lay-search lay-filter='call-select' id="custom_status">-->
+                                    <!--</select>-->
+                                <!--</div>-->
+                                <!--<div class="base-info layui-col-xs3 layui-col-sm3 layui-col-md3">-->
+                                    <!--<button class="layui-btn layui-btn-sm" lay-filter="submitSet" id="setStatus">标记</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<button class="layui-btn  layui-btn-sm layui-btn-normal upload-accessory" id="accessoryUploadBtn" type="button" style="display: inline-block;margin-right: 10px;">上传附件</button>-->
+                </div >
+            </div>
+            <div class="layui-col-xs12 layui-col-sm12 layui-col-md6 " id="call_handle">
+                <blockquote class="layui-elem-quote title-quote">致电操作</blockquote>
+                <div class="layui-btn-container m-20">
+                    <button class="layui-btn layui-btn-sm forcast-call" id="dial">
+                        <i class="iconfont icon-dh"></i> 拨打
+                    </button>
+                    <button class="layui-btn layui-btn-sm forcast-call" id="take-call-0">
+                        <i class="iconfont icon-dh"></i> +0拨
+                    </button>
+
+                    <!--<button class="layui-btn layui-btn-sm forcast-call" id="send-sms">-->
+                        <!--<i class="iconfont icon-dx"></i> 短信-->
+                    <!--</button>-->
+                    <!--<button class="layui-btn layui-btn-sm" id="logout">
+                        <i class="iconfont icon-dx"></i> 登出
+                    </button>-->
+                    <div class="call-tool">
+                        <a class="layui-btn layui-btn-danger no-border btn-hangup layui-btn-sm">挂断</a>
+                        <a class="layui-btn layui-btn-normal no-border btn-hold layui-btn-sm">保持</a>
+                        <a class="layui-btn layui-btn-primary no-border layui-btn-sm sp-btn">通话时间<span class="callTime">00:00:00</span></a>
+                    </div>
+                </div>
+
+                <!--操作区表格开始-->
+                <form class="layui-form m-20 " id="call_status_handle" lay-filter="callStatus"   action="">
+                    <div class="layui-form-item" style="margin-bottom: 0;">
+                        <div class="layui-row">
+                            <div class="base-info layui-col-xs12 layui-col-sm12 layui-col-md12">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">致电结果</label>
+                                    <div class="layui-input-inline" id="notop">
+                                        <select name="call_status_top" lay-verify="required" lay-search lay-filter='call-select-detail' id="call_status_top">
+                                            <option value="">-- 请选择 --</option>
+                                            @for(item in callList){
+                                            <option value="${item.id}">${item.name}</option>
+                                            @}
+                                        </select>
+                                    </div>
+                                    <div class="layui-input-inline call_status_Div" style="margin-right: 0;display: block">
+                                        <select name="call_status_id" lay-verify="required" lay-search lay-filter='call-again-detail'   id="call_status_content">
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="base-info layui-col-xs6 layui-col-sm6 layui-col-md6 reserveDiv" style="display: none">
+                                <div class="layui-form-item ">
+                                    <label class="layui-form-label">预约时间</label>
+                                    <div class="layui-input-block " style="margin-left: 115px !important;">
+                                        <input type="text" name="reserve_time" class="layui-input" id="reserveTime" placeholder="请选择预约时间">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="base-info layui-col-xs12 layui-col-sm12 layui-col-md12">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">电话小结</label>
+                                    <div class="layui-input-block" style="margin-left: 115px !important;">
+                                        <textarea name="call_note" id="phoneNote" placeholder="请填写电话小结" class="layui-textarea"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="base-info layui-col-xs12 layui-col-sm12 layui-col-md12 m-top-10 tc">
+                                <input type="hidden" name="case_id" value="${item.id}">
+                                <input type="hidden" name="custom_phone" value="${item.phone}">
+                                <input type="hidden" name="custom_case_id" id="custom_call_id" value="">
+                                <button class="layui-btn layui-btn-sm " lay-submit   lay-filter="submitSave" id="finishlog">保存提交</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="layui-row">
+                <blockquote class="layui-elem-quote title-quote">致电信息</blockquote>
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 m-20">
+                    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">通话记录</li>
+                            <!--<li>操作日志</li>-->
+                        </ul>
+                        <div class="layui-tab-content">
+                            <div class="layui-tab-item layui-show">
+                                <!-- 电话流水表单开始 -->
+                                <table class="layui-hide" id="callLogTable" lay-filter="demo">
+                                    <thead>
+                                    <tr style="text-align:center;">
+                                        <div class="layui-row">
+                                            <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+                                                <button class="layui-btn layui-btn-sm layui-btn-normal">今日拨打<span class="layui-badge layui-bg-gray DayCallNum">${todatCallTimes}</span></button>
+                                                <button class="layui-btn layui-btn-sm layui-btn-normal">本月拨打<span class="layui-badge layui-bg-gray MonthCallNum">${monthCallTimes}</span></button>
+                                                <button class="layui-btn layui-btn-sm layui-btn-normal">短信条数<span class="layui-badge layui-bg-gray SmsNum">0</span></button>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                    </thead>
+                                </table>
+                                <script type="text/html" id="barDemo">
+                                    <a class="layui-btn layui-btn-xs" lay-event="luyin">播放</a>
+                                </script>
+                                <!-- 电话流水表单结束 -->
+                            </div>
+                            <div class="layui-tab-item" style="text-align:center;">
+                                <!-- 操作日志表格开始 -->
+                                <table class="layui-hide" id="operateLogTable"></table>
+                                <!-- 操作日志表格结束 -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/custom/custom/custom.js?v=1.0"></script>
+<script src="${ctxPath}/static/modular/custom/custom/detail.js?v=2.0"></script>
+<!--<script src="${ctxPath}/static/js/call-system.js"></script>-->
+
+<script>
+   /* layer.open({
+        type: 2,
+        title: '知识库',
+        area: ['400px', '100%'],
+        fix: true,
+        maxmin: true,
+        offset: 'r',
+        shade: 0,
+        content: Feng.ctxPath + "/custom/knowledge"
+    });*/
+    var len = '${item.phone}';
+    let ruten = len.substring(3,7); //提取字符串下标之间的字符。
+    $('input[name="phone"]').val(len.replace(ruten,'****')); //字符串中用字符替换另外字符，或替换一个与正则表达式匹配的子串。
+
+
+    //预测外呼生成的通话日志id
+    var callLog_id = '${callLog_id}';
+    if (callLog_id != null && callLog_id != 0) {
+        $('#custom_call_id').val(callLog_id);
+        $('.forcast-call').hide();  //隐藏电话呼叫相关按钮
+        //通话时长监听
+        //获取某个坐席当天的实时数据(当前状态，当前状态持续时长，示忙次数，示忙时长)；
+        var orgidentity = getCookie("cc_orgidentity");  // astercc | lianghuapai   团队唯一标识
+        var usertype = 'agent';  // agent | account  actercc用户名类型
+        var pwdtype = 'plaintext';  // actercc密码类型
+        var user = getCookie('cc_user');//'8001';
+        var password = getCookie('cc_password');// 'temp123';
+        var url = 'http' + '://' + getCookie("cc_ipaddress") + '/setevent/agentRealtimeCJI?callback=?';
+        var type = 2;//设置坐席取消暂停
+        var getCallStatus = setInterval(function () {
+            $.ajax({
+                cache:false,
+                url: url,
+                type:'get',
+                data:{
+                    orgidentity: orgidentity,
+                    usertype: usertype,
+                    user: user,
+                    pwdtype: pwdtype,
+                    password: password,
+                },
+                dataType:'jsonp',
+                success:function (data) {
+                    var message = data.message.split('|');
+                    if (message[2] == 'idle') {      //-空闲
+                        clearInterval(getCallStatus);
+                        //更新通话记录
+                        var call_record = {
+                            'callSecond': call_time,
+                            'ringSecond': ring_time,
+                            'id': parseInt($("#custom_call_id").val()),
+                        };
+                        updateCallLog(call_record);
+                        call_time = 0;
+                        ring_time = 0;
+                        online = 0;
+                        getCall();
+                    } else if (message[2] == 'ring') {       //--振铃
+                        call_time = 0;
+                        ring_time = message[3];
+                        online = 1;
+                    } else if (message[2] == 'busy') {            //-通话
+                        $('.callTime').html(format_seconds(message[3]));
+                        call_time = message[3];
+                        online = 1;
+                        if(type == 2) {
+                            type = 1;
+                            change_status(type);  //通话状态时，取消
+                        }
+                    } else if (message[2] == 'logout') {            //-通话
+                        clearInterval(getCallStatus);
+                        online = 0;
+                    }
+                },
+                error: function (e) {
+                    console.log(e)
+                }
+            });
+        }, 1000);
+
+        /*layui.use(['layer', 'callCenter'], function () {
+            var callCenter = layui.callCenter;
+            var orgidentity = getCookie("cc_orgidentity");  // astercc | lianghuapai   团队唯一标识
+            var usertype = 'agent';  // agent | account  actercc用户名类型
+            var pwdtype = 'plaintext';  // actercc密码类型
+            var user = getCookie('cc_user');//'8001';
+            var password = getCookie('cc_password');// 'temp123';
+            var getCallStatus = setInterval(function () {
+                callCenter.agentRealtime(orgidentity, usertype, user, pwdtype, password, function (data) {
+                    var message = data.message.split('|');
+                    if (message[2] == 'idle') {      //-空闲
+                        clearInterval(getCallStatus);
+                        //更新通话记录
+                        var call_record = {
+                            'callSecond': call_time,
+                            'ringSecond': ring_time,
+                            'id': parseInt($("#custom_call_id").val()),
+                        };
+                        updateCallLog(call_record);
+                        call_time = 0;
+                        ring_time = 0;
+                        online = 0;
+                        getCall();
+                    } else if (message[2] == 'ring') {       //--振铃
+                        call_time = 0;
+                        ring_time = message[3];
+                        online = 1;
+                    } else if (message[2] == 'busy') {            //-通话
+                        $('.callTime').html(format_seconds(message[3]));
+                        call_time = message[3];
+                        online = 1;
+                    } else if (message[2] == 'logout') {            //-通话
+                        clearInterval(getCallStatus);
+                        online = 0;
+                    }
+                });
+            }, 1000);
+        });*/
+    }
+
+</script>
+@}

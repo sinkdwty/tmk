@@ -1,0 +1,100 @@
+@layout("/common/_container.html"){
+
+<style>
+    .selected{
+        background: #1E90FF;
+        color:#fff;
+    }
+
+    .content{
+        margin-top: 1px;
+    }
+
+    #policyKeys{
+        border: 1px solid #e5e6e7;
+        width: 100%;
+        height: 200px;
+        overflow: auto;
+    }
+
+    #policyKeyHide {
+        border: 1px solid #ccc;
+        margin-top: 2px;
+        z-index: 199;
+        position: absolute;
+        width: 94.5%;
+        background: #fff;
+        padding: 2px;
+        max-height: 200px;
+        overflow: auto;
+    }
+</style>
+
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="PolicyInfoForm">
+
+            <input type="hidden" id="id" value="">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <!--<#input id="policyName" name="* 策略" underline="true"/>-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"><i style='color: red'>*</i> 策略</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="policyName" name="policyName"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">
+                            <i style='color: red'>*</i> 选择话术
+                            <span title="点击输入框获取话术内容,支持拖拽确定话术顺序" class="glyphicon glyphicon-question-sign" style="color: lightseagreen;"></span>
+                        </label>
+                        <div class="col-sm-9" style="position: relative;">
+                            <input type="hidden" id="policyKey" name="policyKey">
+                            <div id="policyKeys" class="form-control" onclick="PolicyInfoDlg.selectSpeech();return false;">
+                                <ul id="sortable"></ul>
+                            </div>
+                            <div id="policyKeyHide" class="hide">
+                                <ul class="contentsUl">
+                                    <input type="text" id="searchSpeech" placeholder="搜索" style="width: 100%;border: 0;margin: 2px 0;">
+                                    @for(list in selectList){
+                                    <li class="content" value="${list.id}">${list.contents}</li>
+                                    @}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">备注</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" rows="3" id="note" name="备注" underline="true" /></textarea>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 这是话术选择的下拉框 -->
+            <div id="menuContent" class="menuContent"
+                 style="display: none; position: absolute; z-index: 200;">
+                <ul id="treeDemo" class="ztree tree-box" style="width: 249px !important;"></ul>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-12" style="text-align: center">
+                    <button class="layui-btn layui-btn-sm" id="ensure" onclick="PolicyInfoDlg.addSubmit()">提交</button>
+                    <!--<#button btnCss="info" name="提交" id="ensure" style= "color: red" icon="fa-check" clickFun="PolicyInfoDlg.addSubmit()"/>-->
+                    <!--<#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="UserInfoDlg.close()"/>-->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/js/jquery-ui-1.10.4.min.js"></script>
+<script src="${ctxPath}/static/modular/task/policy/policy_info.js"></script>
+@}

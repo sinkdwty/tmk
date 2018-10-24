@@ -1,0 +1,50 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal layui-form" >
+            <input type="hidden" id="id" value="${item.id}">
+            <div class="row ">
+                <div class="col-sm-6 col-sm-offset-3">
+                            <#input id="smsBatchName" name="批次名称" value="${item.smsBatchName}" />
+                            <#input id="batchDesc" name="批次描述" value="${item.batchDesc}" />
+                            <#input id="createAt" name="创建时间" value="${item.createAt}" />
+
+                            <#textarea name="短信内容" class="form-control" id="smsContent" value="${item.smsContent}" rows="1"></#textarea>
+
+                            <#input id="batchCapacity" name="批次容量" value="${item.batchCapacity}" />
+                            <#input id="leftCapacity" name="批次剩余容量" value="${item.leftCapacity}" />
+                            <div class="form-group" underline="true">
+                                <label class="col-sm-3 control-label">处理状态</label>
+                                <div class="col-sm-9">
+                                    <select name="status" lay-filter='status' id="status" lay-search >
+                                        <option value="">请选择</option>
+                                        @for(list in smsCodes){
+                                        @if(item.status == list.id){
+                                        <option value="${list.id}" selected >${list.name}</option>
+                                        @}else{
+                                        <option value="${list.id}">${list.name}</option>
+                                        @}
+                                        @}
+                                    </select>
+                                </div>
+                            </div>
+                            <#input id="sendNote" name="结果描述" value="${item.sendNote}" underline="true"/>
+                </div>
+
+
+
+
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10 col-sm-offset-1" style="text-align: center">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="HjSmsBatchInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="HjSmsBatchInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/hjSmsBatch/hjSmsBatch_info.js"></script>
+@}

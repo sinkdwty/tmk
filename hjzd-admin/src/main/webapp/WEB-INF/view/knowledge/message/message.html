@@ -1,0 +1,56 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>短信模板管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12 layui-form custom-input">
+                        <div class="row">
+
+                            <div class="layui-form-item ">
+                                <div class="layui-inline resetInput layui-col-md3 layui-col-sm-6">
+                                    <label class="layui-form-label" style="width: 100px">短信内容</label>
+                                    <div class="layui-input-block">
+                                        <input class="layui-input layui-col-md5plus" maxlength="50" name="part" id="part" placeholder="模板内容">
+                                    </div>
+                                </div>
+                                <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                                    <label class="layui-form-label" style="padding-left: 0">创建时间</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" name="beginTime" id="beginTime" placeholder="开始时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                                        <span class="layui-col-md1plus">-</span>
+                                        <input type="text" name="endTime" id="endTime" placeholder="结束时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="clear: both;text-align: center">
+                                <button class=" layui-btn search-btn layui-btn-sm" data-type="reload" lay-filter="MessageSearch">
+                                    <i class="fa fa-search" style="font-size: 12px !important;"> </i>查询
+                                </button>
+                                <button class="layui-btn layui-btn-primary layui-btn-sm" id="searchReset" data-type="reset">重置</button>
+
+                                <button class="layui-btn layui-bg-green layui-btn-sm" id="create-message">创建模板</button>
+                            </div>
+
+                        </div>
+                        <table class="layui-hide" id="MessageTable" lay-filter="message"></table>
+                        <script type="text/html" id="operation">
+                            <button class="layui-btn layui-btn-xs" lay-event="edit">修改</button>
+                            <button class="layui-btn layui-btn-danger  layui-btn-xs" lay-event="delete">删除</button>
+                            {{# if(d.status == 0 ) { }}
+                            <button class="layui-btn layui-btn-xs" lay-event="unfreeze">启用</button>
+                            {{# } else { }}
+                            <button class="layui-btn  layui-btn-warm layui-btn-xs" lay-event="freezeAccount">禁用</button>
+                            {{# } }}
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/knowledge/message/message.js"></script>
+@}

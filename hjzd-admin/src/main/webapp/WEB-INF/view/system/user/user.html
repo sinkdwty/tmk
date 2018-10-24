@@ -1,0 +1,69 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>用户管理</h5>
+            </div>
+            <div class="ibox-content">
+                <form class="layui-form custom-input">
+                    <div class="layui-form-item ">
+                        <div class="layui-inline layui-col-md4 layui-col-sm-6" style="height: 37px">
+                            <div class="layui-input-inline" style="width: 33%;">
+                                <select name="key" lay-filter="key" id="search_column">
+                                    <option value="name" selected>姓名</option>
+                                    <option value="phone" >手机号</option>
+                                    <option value="account">账号</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline resetInput" style="width: 60%">
+                                <input type="text" name="custom_name" id="custom_name"  placeholder="下拉选择搜索条件" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                            <label class="layui-form-label" style="padding-left: 0">创建时间</label>
+                            <div class="layui-input-inline ">
+                                <input type="text" name="beginTime" id="beginTime" placeholder="开始时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                                <span class="layui-col-md1plus">-</span>
+                                <input type="text" name="endTime" id="endTime" placeholder="结束时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="clear: both;text-align: center">
+                        <div>
+                            <button class=" layui-btn search-btn layui-btn-sm" table-id="userTable" data-type="reload" lay-filter="UserSearch">
+                                <i class="fa fa-search" style="font-size: 12px !important;"> </i>查询
+                            </button>
+                            <button class="layui-btn layui-btn-primary layui-btn-sm" id="searchReset" data-type="reset">重置</button>
+
+                            <button class="layui-btn layui-bg-green layui-btn-sm" id="create-user">创建用户</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <table class="layui-hide" id="managerTable" lay-filter="demo"></table>
+                                <script type="text/html" id="operation">
+                                    <button class="layui-btn layui-btn-xs" lay-event="edit">修改</button>
+                                    <button class="layui-btn layui-btn-danger  layui-btn-xs" lay-event="delete">删除</button>
+                                    {{# if(d.status != 2) { }}
+                                    <button class="layui-btn  layui-btn-warm layui-btn-xs" lay-event="freezeAccount">禁用</button>
+                                    {{# } else { }}
+                                    <button class="layui-btn layui-btn-xs" lay-event="unfreeze">启用</button>
+                                    {{# } }}
+                                    <button class="layui-btn layui-btn-xs" lay-event="resetPwd">重置密码</button>
+                                    <button class="layui-btn layui-btn-xs" lay-event="setRole">分配角色</button>
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="${ctxPath}/static/modular/system/user/user.js"></script>
+@}

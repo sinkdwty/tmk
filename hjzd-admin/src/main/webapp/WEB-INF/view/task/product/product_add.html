@@ -1,0 +1,48 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <form class="layui-form">
+            <div class="form-horizontal" id="productInfoForm">
+
+                <input type="hidden" id="id" value="">
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"><i style='color: red;'>*</i> 项目名称</label>
+                            <div class="layui-input-block">
+                                <input id="name" name="name" placeholder="请输入项目名称" value="" class="layui-input" lay-verify="required"/>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"><i style='color: red;'>*</i> 公司</label>
+                            <div class="layui-input-block">
+                                <input id="citySel" name="citySel" placeholder="请选择公司" value="" class="layui-input" lay-verify="required"
+                                       onclick="ProductInfoDlg.showDeptSelectTree(); return false;"
+                                       readonly="readonly"
+                                       style="background-color: #ffffff !important;"
+                                />
+                                <input type="hidden" name="baseId" id="baseId">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 这是部门选择的下拉框 -->
+                <div id="menuContent" class="menuContent"
+                     style="display: none; position: absolute; z-index: 200;">
+                    <ul id="tree" class="ztree tree-box" style="width: 249px !important;"></ul>
+                </div>
+
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10" style="text-align: center">
+                        <button id="ensure" class="layui-btn layui-btn-sm" lay-submit lay-filter="add">提交</button>
+                        <button id="cancel" onclick="ProductInfoDlg.close()" class="layui-btn layui-btn-sm layui-btn-primary" >取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/task/product/product_info.js"></script>
+@}

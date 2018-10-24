@@ -1,0 +1,42 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal"  id="goodsInfoForm">
+
+            <input type="hidden" id="id" value="">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#input id="goodsName" name="<i style='color: red;'>*</i> 商品名称" underline="true"/>
+                    <#input id="url" name="商品链接" underline="true"/>
+                    <#select id="isSale" name="上下架" underline="true" >
+                        <option value="1">上架</option>
+                        <option value="0">下架</option>
+                    </#select>
+                    <#input id="note" name="备注" underline="true"/>
+                </div>
+
+                <div class="col-sm-6  b-r">
+                    <#input id="goodsPrice" name="商品价格" underline="true"/>
+                    <!--<#input id="categoryNo" name="商品分类" underline="true"/>-->
+
+                    <#input id="stockNum" name="库存量" underline="true"/>
+
+                    <#input id="goodsNote" name="商品备注" underline="true"/>
+                    <!--<#input id="picUrl" name="商品图片" underline="true"/>-->
+                    <#goodsPic id="picUrl" name="商品图片" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-12" style="text-align: center">
+                    <button class="layui-btn layui-btn-sm" id="ensure" onclick="GoodsInfoDlg.addSubmit()">提交</button>
+                    <button class="layui-btn layui-btn-sm layui-btn-primary" id="cancel" onclick="GoodsInfoDlg.close()">取消</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/goods/goods/goods_info.js"></script>
+@}

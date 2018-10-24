@@ -1,0 +1,68 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>知识库管理</h5>
+            </div>
+            <div class="ibox-content">
+                <form class="layui-form">
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline" style="height: 38px">
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <select name="key" lay-filter="key" id="search_column">
+                                    <option value="name" selected>知识名称</option>
+                                    <option value="key_word" >关键字</option>
+                                    <!--<option value="content">知识内容</option>-->
+                                </select>
+                            </div>
+                            <div class="layui-input-inline resetInput">
+                                <input type="text" name="name" id="key_word"  placeholder="下拉选择搜索条件" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline resetInput">
+                            <label class="layui-form-label" style="padding-left: 0">知识分类</label>
+                            <div class="layui-input-inline" style="width: 120px;">
+                                <select name="category" lay-filter="key" id="category">
+                                    <option value="">-- 请选择 --</option>
+                                    @for(item in category){
+                                    <option value="${item.code}">${item.name}</option>
+                                    @}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: center">
+                        <div>
+                            <button class=" layui-btn search-btn layui-btn-sm" table-id="userTable" data-type="reload" lay-filter="UserSearch">
+                                <i class="fa fa-search" style="font-size: 12px !important;"> </i>查询
+                            </button>
+                            <button class="layui-btn layui-btn-primary layui-btn-sm reset-btn" data-type="reset">重置</button>
+                            <button class="layui-btn layui-bg-green layui-btn-sm" data-type="add">新增</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <table class="layui-hide" id="managerTable" lay-filter="knowledge"></table>
+                                <script type="text/html" id="operation">
+                                    <button class="layui-btn layui-btn-xs" lay-event="detail">详情</button>
+                                    <button class="layui-btn layui-btn-xs" lay-event="edit">修改</button>
+                                    <button class="layui-btn layui-btn-danger  layui-btn-xs" lay-event="displayPDF">查看</button>
+                                    <!--<button class="layui-btn layui-btn-danger  layui-btn-xs" lay-event="delete">删除</button>-->
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/knowledge/knowledge/knowledge.js"></script>
+@}

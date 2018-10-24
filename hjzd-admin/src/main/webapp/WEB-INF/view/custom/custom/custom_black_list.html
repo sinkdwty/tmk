@@ -1,0 +1,44 @@
+@layout("/common/_container.html"){
+<style>
+    .layui-form-item .layui-form-label {
+        padding: 6px 0px;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                <div class="layui-inline">
+                    <label class="layui-form-label">所属项目</label>
+                    <div class="layui-input-inline">
+                        <select name="productid" id="productid" style="height: 30px;">
+                            @for(product in products){
+                            <option value="${product.id}">${product.name}</option>
+                            @}
+                        </select>
+                    </div>
+                </div>
+                <a class="layui-btn layui-btn-sm" id="upload"><i class="layui-icon">&#xe67c;</i>选择文件</a>
+                <a class="layui-btn layui-btn-sm" id="black_import"><i class="layui-icon">&#xe67c;</i>开始导入</a>
+                <a style="margin-left: 10px; text-decoration: underline" href="/custom/download-tpl?fileName=custom_black_list.xls&type=blacklist">没有上传的模版？点击下载模版</a>
+            </div>
+            <div class="layui-card-body">
+                系统仅支持 xls、xlsx 格式
+            </div>
+            <div id="fileList" style="margin-left: 20px"></div>
+            <br>
+        </div>
+        <blockquote class="layui-elem-quote tips">
+            xls模板使用引导：<br>
+            1、适用范围：本模板适用于客户黑名单处理。<br>
+            2、模板第一行列名不要随意修改，否则可能会上传失败。<br>
+            3、表格中“手机号码”不能为空,“手机号码”必须是11位的数字。<br>
+            4、表格尽量不要重复使用，否则可能会导致表格内容格式错误。<br>
+        </blockquote>
+    </div>
+</div>
+<div id="btn-pick" style="display: none"></div>
+
+<script src="${ctxPath}/static/modular/custom/custom/custom_info.js"></script>
+<script src="${ctxPath}/static/modular/custom/custom/custom_import.js"></script>
+@}

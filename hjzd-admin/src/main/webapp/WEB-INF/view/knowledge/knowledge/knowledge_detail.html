@@ -1,0 +1,61 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="knowledgeInfoForm">
+
+            <input type="hidden" id="id" value="${item.id}">
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#input id="name" name="知识名称" value="${item.name}" underline="true"/>
+                    <#input id="keyWord" name="关键词" value="${item.keyWord}" underline="true" placeholder="多个关键词英文逗号,隔开"/>
+                    <!--<#input id="accessory" name="附件" underline="true"/>-->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">附件</label>
+                        <div class="col-sm-9">
+                            <!--<a href="/knowledge/download-file?fileName=${item.accessory}">-->
+                                <button type="button" class="btn btn-primary download-file" url="${item.accessory}">
+                                    <i class="fa fa-download"></i>&nbsp;下载附件
+                                </button>
+                            <!--</a>-->
+                            <span id="show_file">${item.accessory}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <#dictSelector id="category" name ="category" code="knowledge" value="${item.category}" label="知识分类"  underline="true" placeholder="-请选择-" />
+
+                    <#select id="status" name="状态" underline="true" >
+                        <option value="1"
+                                @if (item.status == 1) {
+                                    selected='true'
+                                @}
+                            >发布</option>
+                        <option value="0"
+                                @if (item.status == 0) {
+                                    selected='true'
+                                @}
+                            >未发布</option>
+                    </#select>
+                </div>
+                <div style="display: block" class="col-sm-9">
+                    <label class="col-sm-2 control-label">知识内容</label>
+                    <div class="col-sm-10" style="padding-top: 7px;">
+                        ${item.content}
+                    </div>
+                </div>
+            </div>
+
+        <!--<div  id="editor">-->
+
+        </div>
+
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/knowledge/knowledge/knowledge_info.js"></script>
+        <script>
+            $('input').prop("readonly","true");
+        </script>
+@}

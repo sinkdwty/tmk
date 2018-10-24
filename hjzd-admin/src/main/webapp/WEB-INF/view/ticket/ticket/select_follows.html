@@ -1,0 +1,48 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>选择用户</h5>
+            </div>
+            <div class="ibox-content">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <div class="layui-inline" style="margin-bottom: 0">
+                            <div class="layui-input-inline resetInput">
+                                <input type="text" name="keyword" id="keyword" placeholder="姓名" autocomplete="off"
+                                       class="layui-input" style="height: 36px;">
+                            </div>
+                        </div>
+                        <div style="margin-left: 15px;display: inline-block">
+                            <button class=" layui-btn btn-search layui-btn-sm" data-type="reload">
+                                <i class="fa fa-search" style="font-size: 12px !important;"> </i>查询
+                            </button>
+                            <button class="layui-btn layui-btn-primary layui-btn-sm btn-reset" data-type="reset">
+                                重置
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <table class="layui-hide" id="userTable" lay-filter="userTable"></table>
+                                <script type="text/html" id="bar">
+                                    <input type="radio" name="sex" value="{{d.value}}" title="{{d.name}}" lay-filter="select">
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var deptId = '${deptId}';
+    var follows = '${follows}';
+</script>
+<script type="text/javascript" src="${ctxPath}/static/modular/ticket/ticket/select_follows.js"></script>
+@}

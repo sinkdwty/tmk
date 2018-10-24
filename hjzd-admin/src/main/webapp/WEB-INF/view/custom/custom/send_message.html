@@ -1,0 +1,52 @@
+@layout("/common/_container.html"){
+<style>
+    .label-w-135 {
+        width: 109px;
+    }
+</style>
+<form  class="layui-form">
+    <div class="user-form">
+        @if(way == "sendMoreMessage" || way == "sendSearchMessage") {
+        @} else {
+        <input type="hidden" id="case_id" value="${custom.id}">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label label-w-135">客户电话</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="phone" disabled="disabled"  autocomplete="off" class="layui-input" value="${custom.phone}">
+                </div>
+            </div>
+        </div>
+        @}
+        <div class="layui-form-item">
+            <label class="layui-form-label label-w-135">短信模板</label>
+            <div class="layui-input-block">
+                <select name="SmsModel" lay-filter='SmsModel' id="SmsModel" lay-search>
+                    <option value="">请选择</option>
+                    @for(list in selectList){
+                    <option value="${list.id}">${list.message}</option>
+                    @}
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline" style="width:100%;">
+                <label class="layui-form-label label-w-135">短信内容</label>
+                <div class="layui-input-block" >
+                    <textarea name="message"  placeholder="请输入短信内容" class="layui-textarea" id="message"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-sm send-btn" lay-submit="" lay-filter="demo1">发送</button>
+            </div>
+        </div>
+    </div>
+</form >
+<script>
+    var way = "${way}";
+</script>
+<script src="${ctxPath}/static/modular/custom/custom/send_message.js"></script>
+@}

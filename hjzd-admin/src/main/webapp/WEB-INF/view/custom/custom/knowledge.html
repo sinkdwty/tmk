@@ -1,0 +1,26 @@
+@layout("/common/_container.html"){
+<style>
+    .tips {
+        font-size: 14px;
+    }
+</style>
+<div class="layui-row">
+    <div class="layui-form-item">
+        <div style="width: 160px; float: left">
+            <input class="layui-input" name="keyword" id="keyword" placeholder="请输入关键词" style="width: 150px">
+        </div>
+        <div style="width: 60px; float: left">
+            <button class="layui-btn layui-btn-sm layui-btn-normal btn-search">搜索</button>
+        </div>
+    </div>
+
+    <table class="layui-hide" id="knowledgeTable" lay-filter="knowledgeTable"></table>
+    <script type="text/html" id="bar">
+        <button class="layui-btn layui-btn-xs" lay-event="view">查看</button>
+    </script>
+</div>
+
+
+
+<script src="${ctxPath}/static/modular/custom/custom/knowledge.js"></script>
+@}

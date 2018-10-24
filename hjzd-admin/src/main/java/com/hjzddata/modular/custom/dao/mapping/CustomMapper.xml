@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjzddata.modular.custom.dao.CustomMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hjzddata.modular.custom.model.Custom">
+        <id column="id" property="id"/>
+        <result column="batch_no" property="batchNo"/>
+        <result column="custom_name" property="customName"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="company" property="company"/>
+        <result column="address" property="address"/>
+        <result column="principal" property="principal"/>
+        <result column="label" property="label"/>
+        <result column="custom_source" property="customSource"/>
+        <result column="first_contact_time" property="firstContactTime"/>
+        <result column="contact_times" property="contactTimes"/>
+        <result column="call_note" property="callNote"/>
+        <result column="note" property="note"/>
+        <result column="status" property="status"/>
+        <result column="company_id" property="companyId"/>
+        <result column="user_id" property="userId"/>
+        <result column="allocate_time" property="allocateTime"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="updated_time" property="updatedTime"/>
+        <result column="product_id" property="productId"/>
+        <result column="aq_custom" property="aqCustom"/>
+        <result column="import_name" property="importName"/>
+        <result column="import_id" property="importId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        c.id, custom_name as customName, c.phone,c.import_name as importName,c.import_id as importId, c.email, company, address, principal, label, custom_source as customSource,
+        first_contact_time as firstContactTime, contact_times as contactTimes,call_note as callNote, note, u.name as userId, user_id, b.fullname as companyId, c.status, allocate_time as allocateTime, c.created_time as createdTime,
+        c.updated_time as updatedTime, c.product_id as productId, c.aq_custom as aqCustom, c.batch_no as batchNo, c.lt_check_status, c.call_status_name
+    </sql>
+
+    <select id="selectCustomList" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+        select <include refid="Base_Column_List"/> from hj_custom c
+        left join sys_dept b
+        on c.company_id = b.id
+        left join sys_user u
+        on c.user_id = u.id
+        where c.is_del = 0 and c.status <![CDATA[<]]> 5
+
+        <if test="beginTime != null and beginTime !=''">
+            and c.created_time <![CDATA[>=]]> "${beginTime} 00:00:00"
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and c.created_time <![CDATA[<=]]> "${endTime} 23:59:59"
+        </if>
+
+        <if test="update_beginTime != null and update_beginTime !=''">
+            and c.updated_time <![CDATA[>=]]> "${update_beginTime} 00:00:00"
+        </if>
+        <if test="update_endTime != null and update_endTime != ''">
+            and c.updated_time <![CDATA[<=]]> "${update_endTime} 23:59:59"
+        </if>
+
+        <if test="condition != null and condition !='' and column != null and column !=''">
+            <choose>
+                <when test="column == 'phone'">
+                    and c.${column} like CONCAT('%',#{condition},'%')
+                </when>
+                <when test="column == 'contact_times'">
+                    and c.${column} = #{condition}
+                </when>
+                <otherwise>
+                    and ${column} like CONCAT('%',#{condition},'%')
+                </otherwise>
+            </choose>
+        </if>
+
+        <if test="call_status_id != null and call_status_id != -1">
+            and c.call_status_id= #{call_status_id}
+        </if>
+
+        <if test="status != null and status >= 0">
+            and c.status = #{status}
+        </if>
+
+        <choose>
+            <when test="orderByField != null and orderByField !=''">
+                <choose>
+                    <when test="isAsc == true">
+                        order by ${orderByField} ASC
+                    </when>
+                    <otherwise>
+                        order by ${orderByField} DESC
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                order by created_time DESC
+            </otherwise>
+        </choose>
+
+
+    </select>
+
+    <select id="selectMyCustomList" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+        select <include refid="Base_Column_List"/> from hj_custom c
+        left join sys_dept b
+        on c.company_id = b.id
+        left join sys_user u
+        on c.user_id = u.id
+        where c.is_del = 0 and c.status <![CDATA[<]]> 5
+        <if test="userid != null and userid != ''">
+            and c.user_id = #{userid}
+        </if>
+        <if test="beginTime != null and beginTime !=''">
+            and c.created_time <![CDATA[>=]]> "${beginTime} 00:00:00"
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and c.created_time <![CDATA[<=]]> "${endTime} 23:59:59"
+        </if>
+
+        <if test="update_beginTime != null and update_beginTime !=''">
+            and c.updated_time <![CDATA[>=]]> "${update_beginTime} 00:00:00"
+        </if>
+        <if test="update_endTime != null and update_endTime != ''">
+            and c.updated_time <![CDATA[<=]]> "${update_endTime} 23:59:59"
+        </if>
+        <if test="call_status_id != null and call_status_id != -1">
+            and c.call_status_id= #{call_status_id}
+        </if>
+        <if test="check_status != null and check_status != -1">
+            and c.lt_check_status = #{check_status}
+        </if>
+        <if test="condition != null and condition !='' and column != null and column !=''">
+            <choose>
+                <when test="column == 'phone'">
+                    and c.${column} like CONCAT('%',#{condition},'%')
+                </when>
+                <when test="column == 'contact_times'">
+                    and c.${column} = #{condition}
+                </when>
+                <otherwise>
+                    and ${column} like CONCAT('%',#{condition},'%')
+                </otherwise>
+            </choose>
+        </if>
+
+
+
+        <if test="status != null and status >= 0">
+            and c.status = #{status}
+        </if>
+
+        <if test="company != null and company >= 0">
+            and c.company_id = #{company}
+        </if>
+
+        <if test="product_id != null and product_id >= 0">
+            and c.product_id = #{product_id}
+        </if>
+
+        <if test="type != null and type >= 0">
+            <choose>
+                <when test="type == 1">
+                    and c.contact_times <![CDATA[=]]> 0
+                </when>
+                <when test="type == 2">
+                    and c.contact_times <![CDATA[>]]> 0
+                </when>
+            </choose>
+        </if>
+
+        <choose>
+            <when test="orderByField != null and orderByField !=''">
+                <choose>
+                    <when test="isAsc == true">
+                        order by ${orderByField} ASC
+                    </when>
+                    <otherwise>
+                        order by ${orderByField} DESC
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                order by created_time DESC
+            </otherwise>
+        </choose>
+
+
+    </select>
+
+    <insert id="importCustom">
+      insert  into hj_custom
+      (custom_name,phone,email,address,company,custom_source,label,note,created_time,updated_time,product_id,import_name,iport_id)
+      values
+      (#{customName},#{phone},#{email},#{address},#{company},#{customSource},#{label},#{note},#{createdTime},#{updatedTime},#{productId},#{importName},#{importId})
+    </insert>
+
+    <select id="getByPhone" resultType="custom">
+        select
+        id
+        from
+        hj_custom
+        where is_del = 0 and phone = #{phone}
+        <if test="company != null and company >= 0">
+            and company_id = #{company}
+        </if>
+    </select>
+
+    <update id="updateStatusByIds" >
+        update hj_custom set status = 4, user_id = null , company_id = null, company = null, allocate_time = null where id in
+        <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <update id="deleteCustomByIds" >
+        update hj_custom set status = 5, is_del = 1 where id in
+        <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <update id="assignCustom" >
+        update hj_custom set user_id = #{user_id}, allocate_time = #{allocateTime}, status = 2 where id in
+        <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <select id="selectAssignCustomList" resultType="custom">
+        select c.id, c.custom_name, c.phone from hj_custom c
+        left join sys_dept b
+        on c.company_id = b.id
+        left join sys_user u
+        on c.user_id = u.id
+        where c.is_del = 0 and c.status <![CDATA[<]]> 5
+        <if test="userid != null and userid != ''">
+            and c.user_id = #{userid}
+        </if>
+        <if test="beginTime != null and beginTime !=''">
+            and c.created_time <![CDATA[>=]]> "${beginTime} 00:00:00"
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and c.created_time <![CDATA[<=]]> "${endTime} 23:59:59"
+        </if>
+
+        <if test="update_beginTime != null and update_beginTime !=''">
+            and c.updated_time <![CDATA[>=]]> "${update_beginTime} 00:00:00"
+        </if>
+        <if test="update_endTime != null and update_endTime != ''">
+            and c.updated_time <![CDATA[<=]]> "${update_endTime} 23:59:59"
+        </if>
+        <if test="product_id != null and product_id >= 0">
+            and c.product_id = #{product_id}
+        </if>
+        <if test="limit != null and limit >= 0">
+            and c.id <![CDATA[<]]> #{id}
+        </if>
+
+        <if test="condition != null and condition !='' and column != null and column !=''">
+            <choose>
+                <when test="column == 'phone'">
+                    and c.${column} like CONCAT('%',#{condition},'%')
+                </when>
+                <otherwise>
+                    and ${column} like CONCAT('%',#{condition},'%')
+                </otherwise>
+            </choose>
+        </if>
+
+        <if test="status != null and status >= 0">
+            and c.status = #{status}
+        </if>
+        order by created_time DESC
+        <if test="limit != null and limit >= 0">
+            limit 0,1
+        </if>
+    </select>
+
+
+    <!-- 批量插入数据 -->
+    <insert id ="insertBatchNew" parameterType="java.util.List" >
+        <selectKey resultType ="java.lang.Integer" keyProperty= "id"
+                   order= "AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey >
+        insert into hj_custom
+        (custom_name,phone,email,address,company,company_id,custom_source,label,note,created_time,updated_time,product_id,user_id,status,import_name,import_id,batch_no)
+        values
+        <foreach collection ="list" item="item" index= "index" separator =",">
+            (
+            #{item.customName}, #{item.phone},#{item.email},
+            #{item.address}, #{item.company}, #{item.companyId},#{item.customSource},
+            #{item.label}, #{item.note},#{item.createdTime},
+            #{item.updatedTime},#{item.productId},#{item.userId},#{item.status},#{item.importName},#{item.importId},#{item.batchNo}
+            )
+        </foreach >
+    </insert >
+
+    <!-- 数据统计  开始 -->
+    <select id="dataReport" resultType="map">
+        select u.account as person_account, "九格" as data_source, c.batch_no as data_batch, c.import_name as data_importer, c.created_time as data_import_time,
+        sum(c.contact_times) as data_call_num,
+        count(distinct (c.id)) as performance_get_nums,
+        sum( l.performance_success_nums) AS performance_success_nums,
+        sum(l.call_second) as total_call_second,
+        sum(l.ring_second) as total_ring_second ,
+        sum( l.performance_called_nums) AS performance_called_nums,
+        sum(l.performance_succ_called_nums) as performance_succ_called_nums,
+        sum(l.performance_callLog_nums) as performance_callLog_nums, sum(l.data_succ_callLog_num) as data_succ_callLog_num, sum(l.data_fail_call_num) as data_fail_call_num
+        from sys_user u
+        LEFT JOIN hj_custom c on c.user_id=u.id
+        left join
+        (select log.case_id,sum( IF ( log.call_status_name = '成功', 1, 0 ) ) AS performance_success_nums,count(DISTINCT(log.case_id)) as performance_called_nums,sum(if(FIND_IN_SET(log.call_status_id,#{call_status}),1,0)) as performance_succ_called_nums,sum(log.call_second) as call_second,
+        sum(log.ring_second) as ring_second, sum(if(log.call_second>=0,1,0)) as performance_callLog_nums, sum(if(log.call_second>0,1,0)) as data_succ_callLog_num, sum(if(log.call_second=0,1,0)) as data_fail_call_num from hj_call_log log
+        where 1=1
+        <if test="beginTime != null and beginTime !=''">
+            and log.created_at <![CDATA[>=]]> "${beginTime}"
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and log.created_at <![CDATA[<=]]> "${endTime}"
+        </if>
+        group by case_id) as l on c.id=l.case_id
+        where 1=1 and c.is_del=0
+        <if test="account != null and account != ''">
+            and u.account like CONCAT('%',#{account},'%')
+        </if>
+        <if test="batch_no != null and batch_no != ''">
+            and c.batch_no like CONCAT('%',#{batch_no},'%')
+        </if>
+
+        <if test="product_id != null and product_id >= 0">
+            and c.product_id = #{product_id}
+        </if>
+        <if test="user_id != null and user_id.size > 0">
+            and c.user_id in
+            <foreach item="item" index="index" collection="user_id" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        GROUP BY c.user_id, c.batch_no order by u.id asc
+    </select>
+
+    <select id="dataReportOld" resultType="map">
+        select u.account as person_account, "九格" as data_source, c.batch_no as data_batch, c.import_name as data_importer, c.created_time as data_import_time,
+        sum(c.contact_times) as data_call_num, count(distinct (c.id)) as performance_get_nums,
+        (select count(distinct a.id) from hj_custom as a where a.call_status_name='成功' and a.user_id=c.user_id) as performance_success_nums,
+        sum(l.call_second) as total_call_second, sum(l.ring_second) as total_ring_second ,
+        (select count(distinct a.id) from hj_custom as a where a.first_contact_time!="" and a.user_id=c.user_id) as performance_called_nums,
+        (select count(hc.id) from hj_custom hc where hc.user_id=c.user_id and hc.call_status_id in (select dic1.id from sys_dict dic1 left join sys_dict dic2 on dic1.pid=dic2.id where dic2.name='已接通')) as performance_succ_called_nums,
+        sum(if(l.call_second>=0,1,0)) as performance_callLog_nums, sum(if(l.call_second>0,1,0)) as data_succ_callLog_num,
+        sum(if(l.call_second=0,1,0)) as data_fail_call_num
+        from hj_custom c
+        LEFT JOIN sys_user u on c.user_id=u.id
+        LEFT JOIN hj_call_log l on c.id=l.case_id where 1=1 and c.is_del=0
+        <if test="account != null and account != ''">
+            and u.account like CONCAT('%',#{account},'%')
+        </if>
+        <if test="batch_no != null and batch_no != ''">
+            and c.batch_no like CONCAT('%',#{batch_no},'%')
+        </if>
+        <if test="beginTime != null and beginTime !=''">
+            and l.created_at <![CDATA[>=]]> "${beginTime}"
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and l.created_at <![CDATA[<=]]> "${endTime}"
+        </if>
+
+        <if test="product_id != null and product_id >= 0">
+            and c.product_id = #{product_id}
+        </if>
+        <if test="user_id != null and user_id.size > 0">
+            and c.user_id in
+            <foreach item="item" index="index" collection="user_id" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        GROUP BY c.user_id, c.batch_no order by u.id asc
+    </select>
+    <!-- 数据统计  结束 -->
+</mapper>

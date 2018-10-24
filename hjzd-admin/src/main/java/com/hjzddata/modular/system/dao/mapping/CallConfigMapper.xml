@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjzddata.modular.system.dao.CallConfigMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hjzddata.modular.system.model.CallConfig">
+        <id column="id" property="id" />
+        <result column="base_name" property="baseName" />
+        <result column="base_id" property="baseId" />
+        <result column="config" property="config" />
+        <result column="call_system_id" property="callSystemId" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="is_del" property="isDel" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, base_name, base_id, call_system_id. config, created_at, updated_at, is_del
+    </sql>
+
+    <select id="list" resultType="map">
+        select * from hj_call_config
+        where is_del = 0
+        order by created_at DESC
+    </select>
+
+    <select id="getcallConfig" resultType="callConfig">
+        select * from hj_call_config
+        where is_del = 0 and base_id = #{baseId} and call_system_id = #{call_system}
+    </select>
+
+</mapper>

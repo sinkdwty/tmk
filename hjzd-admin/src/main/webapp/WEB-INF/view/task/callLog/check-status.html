@@ -1,0 +1,75 @@
+@layout("/common/_container.html"){
+<style>
+    .label-w-135 {
+        width: 109px;
+    }
+</style>
+<form  class="layui-form">
+    <div class="user-form">
+        <input class="layui-input" type="hidden" id="id" value="${recordId}">
+        <div class="layui-form-item">
+            <label class="layui-form-label label-w-135">质检结果</label>
+            <div class="layui-input-block">
+                <select name="check_status" id="check_status" lay-search>
+                    <option value="">请选择</option>
+                    <option value="1">通过</option>
+                    <option value="2">不通过</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline" style="width:100%;">
+                <label class="layui-form-label label-w-135">质检备注内容</label>
+                <div class="layui-input-block" >
+                    <textarea name="check_note"  placeholder="请输入质检备注内容" class="layui-textarea" id="check_note"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-sm send-btn" lay-submit="" lay-filter="check_submit">提交</button>
+            </div>
+        </div>
+    </div>
+</form >
+<script>
+    layui.use(['form', 'element'], function(){
+        var form = layui.form;
+        var layer = layui.layer;
+
+        //监听提交
+        form.on('submit(check_submit)', function(data){
+            var url = Feng.ctxPath +"/callLog/do-check-status/";
+            var id = $("#id").val();
+            if(!id) {
+                layer.msg('页面错误！');
+                return false;
+            }
+            if (data.field.check_status == "") {
+                layer.msg('请选择质检结果！');
+                return false;
+            }
+            var CallLogInfo = {};
+            CallLogInfo.id = id;
+            CallLogInfo.checkStatus = data.field.check_status;
+            CallLogInfo.checkNote = data.field.check_note;
+            $(this).attr('disabled', true);
+            //提交信息
+            var ajax = new $ax(url, function(data){
+                layer.msg(data.message);
+                setTimeout(function () {
+                    window.parent.layer.closeAll();
+                    window.parent.CallLog.table.reload('CallLogTable');
+                },1000);
+            },function(data){
+                Feng.error(data.message);
+            });
+            ajax.set(CallLogInfo);
+            ajax.start();
+
+        });
+
+    });
+</script>
+@}

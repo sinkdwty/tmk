@@ -1,0 +1,37 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal"  id="callConfigForm">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <!--<#dictSelector id="callSystemId" name ="callSystemId" code="call_system"  label="* 外呼系统"  underline="true" placeholder="-请选择-" />-->
+                    <#input id="username" name="* 分机号" placeholder="分机号"/>
+                    <div class="form-group div-password">
+                        <label class="col-sm-3 control-label">* 密码</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="password" name="password" type="password" placeholder="密码">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row btn-group-m-t">
+                <div class="col-sm-12" style="text-align: center">
+                    <button class="layui-btn layui-btn-sm" id="call_login_ensure">登录</button>
+                    <!--<#button btnCss="info" name="登录" id="call_login_ensure" icon="fa-check"/>-->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+@if(call_system_name == "汉天"){
+<script>
+    $('.div-password').hide();
+</script>
+@}
+<!--<script src="${ctxPath}/static/js/call-system.js"></script>-->
+
+@}

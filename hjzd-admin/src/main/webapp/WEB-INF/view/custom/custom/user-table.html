@@ -1,0 +1,29 @@
+@layout("/common/_container.html"){
+<div class="wrapper wrapper-content" style="padding: 10px 10px">
+    <form id="searchUserForm" class="layui-form" action="" method="get">
+        <input type="hidden" name="way" value="${way}">
+        <div class="layui-row">
+            <div class="layui-col-xs5 layui-col-sm5 layui-col-md3">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">坐席账号:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" placeholder="请输入坐席账号" class="layui-input" id="userName">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-xs2 layui-col-sm2 layui-col-md3">
+                <button type="button" class="layui-btn layui-btn-sm  search-btn" style="margin-left:10px" data-type="search">查询</button></div>
+        </div>
+
+    </form>
+    <table class="layui-hide" id="userTable" lay-filter="table-filter"></table>
+    <div class="text-center">
+        <button type="button" class="layui-btn layui-btn-sm layui-btn-normal ensure-assign-custom">确定</button>
+    </div>
+</div>
+<script type="text/html" id="radioTpl">
+    <input type="radio" name="id" value="{{d.id}}" title=" " lay-filter="radiodemo">
+</script>
+<script src="${ctxPath}/static/modular/custom/custom/assign-custom.js"></script>
+@}

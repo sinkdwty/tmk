@@ -1,0 +1,133 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>通话日志管理</h5>
+            </div>
+            <div class="ibox-content">
+                <form class="layui-form custom-input">
+                    <div class="layui-form-item">
+                        <div class="layui-inline layui-col-md4 layui-col-sm-6" style="height: 37px">
+                            <div class="layui-input-inline" style="width: 33%;">
+                                <select name="key" lay-filter="key" id="search_column">
+                                    <option value="user_name" selected>坐席姓名</option>
+                                    <option value="custom_name">客户姓名</option>
+                                    <option value="custom_phone">手机号码</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline resetInput" style="width: 60%">
+                                <input type="text" name="name" id="condition" placeholder="下拉选择搜索条件" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                            <label class="layui-form-label" style="padding-left: 0">创建时间</label>
+                            <div class="layui-input-inline" >
+                                <input type="text" name="beginTime" id="beginTime" placeholder="开始时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                                <span class="layui-col-md1plus">-</span>
+                                <input type="text" name="endTime" id="endTime" placeholder="结束时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                            </div>
+                        </div>
+
+
+                        <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                            <label class="layui-form-label" style="padding-left: 0">质检状态</label>
+                            <div class="layui-input-inline resetInput" style="width: 215px">
+                                    <select name="check_status" underline="true" id="check_status">
+                                        <option value="" selected>请选择</option>
+                                        <option value="0" >未质检</option>
+                                        <option value="1" >质检通过</option>
+                                        <option value="2" >质检不通过</option>
+                                    </select>
+                            </div>
+                        </div>
+
+                        <!--<div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                            <label class="layui-form-label" style="padding-left: 0">致电结果</label>
+                            <div class="layui-input-inline resetInput" style="width: 215px">
+                                <select name="call_status_id"  id="call_status_id">
+                                    <option value="-1">请选择</option>
+                                    @for(item in successCode){
+                                    <option value="${item.id}">${item.name}</option>
+                                    @}
+                                </select>
+                            </div>
+                        </div>-->
+                        <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                            <label class="layui-form-label" style="padding-left: 0px;">致电结果</label>
+                            <div class="layui-input-inline sp-input">
+                                <div style="display: initial;width: 49%;">
+                                    <select name="call_status_top" lay-verify="required" lay-search lay-filter='call-select' id="call_status_top">
+                                        <option value="-1">请选择</option>
+                                        @for(item in successCode){
+                                        <option value="${item.id}">${item.name}</option>
+                                        @}
+                                    </select>
+                                </div>
+
+                                <!--</div>-->
+
+                                <!--<div class="layui-input-inline sp-input call_status_Div" style="margin-right: 0;display: block">-->
+                                <div style="display: initial;width: 49%;" class="sp-input call_status_Div">
+                                    <select name="call_status_id" lay-verify="required" lay-search lay-filter='call-again'   id="call_status_id">
+
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <a href="#" id="download" style="display: none;"><span>录音下载</span></a>
+                    <div style="text-align: center">
+                        <div>
+                            <button class=" layui-btn btn-search layui-btn-sm" data-type="reload">
+                                <i class="fa fa-search" style="font-size: 12px !important;"> </i>查询
+                            </button>
+                            <button class="layui-btn layui-btn-primary layui-btn-sm btn-reset" data-type="reset">重置
+                            </button>
+                            <button class="layui-btn layui-btn-primary layui-btn-sm btn-reset" data-type="export">导出
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                @if(shiro.hasRole("worker")){
+                                <input type="hidden" value="worker" class="hasRole"/>
+                                @}else{
+                                <input type="hidden" value="others" class="hasRole"/>
+                                @}
+                                <table class="layui-hide" id="CallLogTable" lay-filter="CallLogTable"></table>
+
+                                <script type="text/html" id="operation">
+                                    <button class="layui-btn  layui-btn-default layui-btn-xs" lay-event="custom-detail">客户详情</button>
+                                    <button class="layui-btn  layui-btn-default layui-btn-xs play" lay-event="openCustom">
+                                        录音播放
+                                    </button>
+                                    <button class="layui-btn  layui-btn-default layui-btn-xs download" lay-event="download">
+                                        下载
+                                    </button>
+                                    @if(!shiro.hasRole("worker")){
+                                    {{# if(d.checkStatus  > 0){ }}
+                                    <button class="layui-btn  layui-btn-default layui-btn-xs" lay-event="checkCaseLog">再次质检</button>
+                                    {{# }else{ }} <!-- 若未质检，按钮显示 -->
+                                    <button class="layui-btn  layui-btn-default layui-btn-xs" lay-event="checkCaseLog">质检</button>
+                                    {{# } }}
+                                    @}
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/task/callLog/callLog.js"></script>
+<script src="${ctxPath}/static/modular/custom/custom/custom.js?v=123"></script>
+@}

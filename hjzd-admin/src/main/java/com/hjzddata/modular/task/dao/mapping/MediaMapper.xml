@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjzddata.modular.task.dao.MediaMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hjzddata.modular.task.model.Media">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="pic" property="pic" />
+        <result column="url" property="url" />
+        <result column="category" property="category" />
+        <result column="introduce" property="introduce" />
+        <result column="tags" property="tags" />
+        <result column="is_del" property="isDel" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="created_ip" property="createdIp" />
+        <result column="updated_ip" property="updatedIp" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, pic, url, category, introduce, tags, is_del AS isDel, created_at AS createdAt, updated_at AS updatedAt, created_ip AS createdIp, updated_ip AS updatedIp
+    </sql>
+
+    <select id="selectMedias" resultType="map"  parameterType="com.baomidou.mybatisplus.plugins.Page">
+        select <include refid="Base_Column_List"/> from hj_media where is_del=0
+        <if test="name != null and name != ''">
+            and name like CONCAT('%', #{name} ,'%')
+        </if>
+        <if test="category != null and category != ''">
+            and category=#{category}
+        </if>
+        order  by id desc
+    </select>
+
+</mapper>

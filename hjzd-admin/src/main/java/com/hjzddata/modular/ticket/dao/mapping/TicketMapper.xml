@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjzddata.modular.ticket.dao.TicketMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.hjzddata.modular.ticket.model.Ticket">
+		<id column="id" property="id" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="custom_id" property="customId" />
+		<result column="custom_name" property="customName" />
+		<result column="accessory" property="accessory" />
+		<result column="status" property="status" />
+		<result column="levels" property="levels" />
+		<result column="tags" property="tags" />
+		<result column="created_at" property="createdAt" />
+		<result column="updated_at" property="updatedAt" />
+		<result column="is_del" property="isDel" />
+		<result column="ticket_from" property="ticketFrom" />
+		<result column="create_user_id" property="createUserId" />
+		<result column="assign_user_id" property="assignUserId" />
+		<result column="assign_dept_id" property="assignDeptId" />
+		<result column="create_user_name" property="createUserName" />
+		<result column="assign_user_name" property="assignUserName" />
+		<result column="assign_dept_name" property="assignDeptName" />
+		<result column="follows" property="follows" />
+		<result column="follow_names" property="followNames" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, title, content, custom_id, custom_name, accessory, status,
+		tags, created_at, updated_at, is_del, ticket_from, levels, create_user_id,
+		assign_user_id, create_user_name, assign_user_name, assign_dept_id, assign_dept_name, follow_names
+	</sql>
+
+	<select id="selectTickets" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+		select
+		<include refid="Base_Column_List" />
+		from hj_ticket
+		where is_del = 0
+		<if test="title != null and title != '' and column != null and column != ''">
+			and ${column} like CONCAT('%',#{title},'%')
+		</if>
+		<if test="assignUserId != null and assignUserId != 0">
+			and (assign_user_id = #{assignUserId} )
+		</if>
+		<if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+			and (created_at between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+		</if>
+	</select>
+
+	<update id="setStatus">
+		update hj_ticket set status = #{status} where id =
+		#{userId}
+	</update>
+
+	<select id="ticketTitleExit" resultType="map">
+		select id,title
+		from hj_ticket
+		where is_del = 0 and title = #{title}
+		<if test="id != null and id != ''">
+			and id != #{id}
+		</if>
+	</select>
+
+</mapper>

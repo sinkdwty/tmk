@@ -1,0 +1,294 @@
+@font-face {font-family: "iconfont";
+    src: url('../task-detail/iconfont.eot?t=1520821227655'); /* IE9*/
+    src: url('../task-detail/iconfont.eot?t=1520821227655#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('data:application/x-font-woff;charset=utf-8;base64,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') format('woff'),
+    url('../task-detail/iconfont.ttf?t=1520821227655') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url('../task-detail/iconfont.svg?t=1520821227655#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 30px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-yh:before { content: "\e851"; }
+
+.icon-bybd:before { content: "\e613"; }
+
+.icon-dh:before { content: "\e627"; }
+
+.icon-dx:before { content: "\e61d"; }
+
+.icon-jrbd:before { content: "\e76e"; }
+.gray-bg {
+    background-color: white;
+}
+.info-head-bar .head-bar-container {
+    padding: 20px;
+    border: 1px solid #d7d7d7;
+}
+.info-head-bar .head-bar-container .jrbd{
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    background: #79c062;
+    color: #fff;
+    line-height: 75px;
+    text-align: center;
+}
+.info-head-bar .head-bar-container .bybd{
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    background: #4c4c4c;
+    color: #fff;
+    line-height: 75px;
+    text-align: center;
+}
+.info-head-bar .head-bar-container .dx{
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    background: #1dc0ef;
+    color: #fff;
+    line-height: 75px;
+    text-align: center;
+}
+.info-head-bar .head-bar-container .head-bar-right-info span{
+    display: inline-block;
+    width: 100%;
+    font-size: 16px;
+    color: #646464;
+    font-weight: 600;
+}
+.info-head-bar .head-bar-container .head-bar-right-info span:nth-of-type(1){
+    margin-bottom: 30px;
+}
+/**-----客户信息------**/
+
+.user-title {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #646464;
+    margin-bottom: 10px;
+}
+.user-info-container {
+    padding: 15px 10px;
+    border: 1px solid #d7d7d7;
+}
+.user-info-container .face-icon,
+.user-info-container .user-tool-phone{
+    display: inline-block;
+    vertical-align: bottom;
+}
+.user-info-container .face-icon {
+    margin-right: 20px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background: #75818f;
+    color: #fff;
+}
+.user-info-container .user-tool-phone span{
+    display: inline-block;
+    width: 100%;
+}
+.user-info-container .user-tool-phone span:nth-of-type(1){
+    margin-bottom: 15px;
+}
+.user-info-detail {
+    margin-top: 15px;
+}
+.user-info-detail div.base-info {
+    margin-bottom: 15px;
+}
+.layui-btn-group {
+    /*padding-top: 22px;*/
+}
+.layui-btn-sm {
+    padding: 0 7px !important;
+}
+.user-info-detail div.choose-result {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 10px 10px 0 10px;
+}
+.input-beizhu {
+    display: inline-block;
+}
+.layui-input-inline {
+    width: 183px !important;
+}
+.layui-tab {
+    margin: -8px 0 0 0 !important;
+}
+.special-label {
+    float: left;
+    margin: 10px 10px 0 0;
+}
+/*-----电话条-----*/
+.call-tool {
+    display: inline-block;
+}
+@media screen and (max-width: 768px) {
+    .layui-show-xs-center {
+        text-align: center !important;
+    }
+    .layui-show-xs-marginTop10 {
+        margin-top: 10px !important;
+    }
+}
+/**-----公共css------**/
+.tc {
+    text-align: center;
+}
+.tl {
+    text-align: left;
+}
+.p-a{
+    position: absolute;
+    z-index: 3;
+}
+.m-20 {
+    margin: 20px 0;
+}
+.m-top-20 {
+    margin-top: 8px;
+}
+.m-top-10 {
+    margin-top: 10px;
+}
+.m-top-null {
+    margin-top: 0px;
+}
+.m-bottom-0 {
+    margin-bottom: 0px;
+}
+.m-bottom-10 {
+    margin-bottom: 10px;
+}
+.m-bottom-20 {
+    margin-bottom: 20px;
+}
+.m-left-135 {
+    margin-left: 135px;
+}
+.m-left-80 {
+    margin-left: 80px;
+}
+.label-w-100 {
+    width: 100px;
+}
+.label-w-90 {
+    width: 90px;
+}
+.label-w-65 {
+    width: 65px;
+}
+div.inline-bl{
+    display: inline;
+}
+div.div-ml-120 {
+    margin-left: 120px;
+}
+input.no-b{
+    border:0;
+}
+.label-w-50 {
+    width: 50px;
+}
+.label-w-95 {
+    width: 95px;
+}
+.iframe-body {
+    padding: 3px 10px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+::-webkit-scrollbar-track {
+    background-color: #F5F5F5
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #999
+}
+
+
+div.layui-form-item {
+    margin-bottom: 10px;
+}
+.layui-form-item .layui-input, .layui-form-item .layui-select, .layui-form-item .layui-textarea {
+    height: 30px;
+}
+.login .layui-form-item .layui-input{
+    height: 38px;
+}
+.layui-form-item .layui-form-label {
+    /*line-height: 12px;*/
+    padding: 6px 15px;
+}
+
+div.layui-main {
+    margin-top: 15px;
+}
+
+.layui-form-item .layui-form-select dl {
+    /*top: 35px;*/
+}
+
+label#radioLable {
+    line-height: 20px;
+}
+.clearfix:after,.clearfix:before{
+    content:" ";
+    display: table;
+}
+.clearfix:after{
+    clear: both;
+}
+
+.user-form .layui-form-item {
+    margin-bottom: 0;
+}
+
+
+#notop .layui-form-selectup dl {
+    /*top: auto;*/
+}
+
+/*-----e框架生成表格滚动条-----*/
+.table-scroll {
+    overflow-x: auto;
+    width: 100%;
+}
+
+/*-----来电详情标题栏-----*/
+.title-quote {
+    margin-bottom: 0;
+    padding: 5px 15px;
+    font-size: 14px;
+}
+/*-----表格背景颜色-----*/
+.tdbg {
+    background: #e6e6e6;
+}
+
+@media screen and (max-width: 1600px) {
+    .layui-form-item .layui-form-select dl {
+        max-height: 180px;
+    }
+}
+.taskDataDetail {
+    margin-top: -20px
+}

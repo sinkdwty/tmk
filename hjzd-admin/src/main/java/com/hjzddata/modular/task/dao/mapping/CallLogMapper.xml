@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjzddata.modular.task.dao.CallLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hjzddata.modular.task.model.CallLog">
+        <id column="id" property="id"/>
+        <result column="case_id" property="caseId"/>
+        <result column="custom_name" property="customName"/>
+        <result column="custom_phone" property="customPhone"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="call_status_id" property="callStatusId"/>
+        <result column="call_status_name" property="callStatusName"/>
+        <result column="call_start_time" property="callStartTime"/>
+        <result column="call_end_time" property="callEndTime"/>
+        <result column="call_second" property="callSecond"/>
+        <result column="ring_second" property="ringSecond"/>
+        <result column="call_agent_no" property="callAgentNo"/>
+        <result column="call_sessionid" property="callSessionid"/>
+        <result column="call_userdata" property="callUserdata"/>
+        <result column="note" property="note"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="created_ip" property="createdIp"/>
+        <result column="checker" property="checker"/>
+        <result column="check_date" property="checkDate"/>
+        <result column="check_status" property="checkStatus"/>
+        <result column="check_note" property="checkNote"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, case_id as caseId, custom_name as customName, custom_phone as customPhone, user_id as userId, user_name as userName,
+        call_status_id as callStatusId, call_status_name as callStatusName, call_start_time as callStartTime, call_end_time as callEndTime,
+        call_second as callSecond, ring_second as ringSecond, call_agent_no as callAgentNo, call_sessionid as callSessionid, call_userdata as callUserdata, note,
+        created_at as createdAt, created_ip as createdIp, checker as checker,check_date as checkDate,check_status as checkStatus, check_note as checkNote
+    </sql>
+    <select id="selectCallList" resultType="java.util.Map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+        select
+        <include refid="Base_Column_List"/>
+        from hj_call_log where 1 = 1
+
+        <if test="caseId != null and caseId > 0">
+            and case_id = #{caseId}
+        </if>
+        <if test="user_id != null and user_id.size > 0">
+            and user_id in
+            <foreach item="item" index="index" collection="user_id" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+
+        <if test="beginTime != null and beginTime !=''">
+            and created_at <![CDATA[>=]]> CONCAT(#{beginTime},' 00:00:00')
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and created_at <![CDATA[<=]]> CONCAT(#{endTime},' 23:59:59')
+        </if>
+        <if test="checkStatus != null and checkStatus !=''">
+            and check_status = #{checkStatus}
+        </if>
+        <if test="call_status_id != -1">
+            and call_status_id = #{call_status_id}
+        </if>
+        <if test="condition != null and condition !='' and column != null and column != ''">
+            and ${column} like CONCAT('%',#{condition},'%')
+
+        </if>
+
+        <choose>
+            <when test="orderByField != null and orderByField !=''">
+                <choose>
+                    <when test="isAsc == true">
+                        order by ${orderByField} ASC
+                    </when>
+                    <otherwise>
+                        order by ${orderByField} DESC
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                order by created_at DESC
+            </otherwise>
+        </choose>
+
+    </select>
+
+    <select id="getCallConfig" resultType="String">
+        select
+        c.config
+        FROM hj_call_config c
+        left join sys_user u on c.base_id = u.deptid
+        where u.id = ${userId};
+    </select>
+
+    <select id="selectLastLogBycase" resultType="List">
+        select
+        c.check_status,c.check_date,u.name
+        FROM hj_call_log c
+        left join sys_user u on c.checker = u.id
+        where c.case_id = ${caseId}
+        order by c.id DESC
+        limit 1;
+    </select>
+
+
+
+</mapper>

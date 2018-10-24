@@ -1,0 +1,135 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>报表统计</h5>
+            </div>
+            <div class="ibox-content">
+                <form class="layui-form">
+                    <div class="layui-inline resetInput">
+                        <label class="layui-form-label" style="padding-left: 0;font-weight: bold;">坐席账号</label>
+                        <div class="layui-input-inline resetInput">
+                            <input type="text" name="account" id="account" value=""  placeholder="请输入坐席账号" autocomplete="off" class="layui-input" style="height: 30px">
+                        </div>
+                    </div>
+                    <div class="layui-inline resetInput">
+                        <label class="layui-form-label" style="padding-left: 0;font-weight: bold;">数据批次</label>
+                        <div class="layui-input-inline resetInput">
+                            <input type="text" name="batch_no" id="batch_no" value=""  placeholder="请输入数据批次" autocomplete="off" class="layui-input" style="height: 30px">
+                        </div>
+                    </div>
+                    <div class="layui-inline resetInput">
+                        <label class="layui-form-label" style="padding-left: 0;font-weight: bold;">统计时间</label>
+                        <div class="layui-input-inline" style="width: 150px;float: left;margin-right: 5px;">
+                            <input type="text" name="beginTime" id="beginTime" placeholder="开始时间" autocomplete="off" class="layui-input" placeholder="yyyy-MM-dd HH:mm:ss" style="height: 30px">
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 150px;">
+                            <input type="text" name="endTime" id="endTime" placeholder="结束时间" autocomplete="off" class="layui-input" placeholder="yyyy-MM-dd HH:mm:ss" style="height: 30px">
+                        </div>
+                    </div>
+
+                    <div style="text-align: center">
+                        <div>
+                            <button class=" layui-btn search-btn layui-btn-sm" table-id="userTable" data-type="reload" lay-filter="UserSearch">
+                                <i class="fa fa-search" style="font-size: 12px !important;"> </i>查询
+                            </button>
+                            <button class="layui-btn layui-btn-primary layui-btn-sm reset-btn" data-type="reset">重置</button>
+                            <button class="layui-btn  export-btn layui-bg-green layui-btn-sm export">导出</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <table class="layui-table" id="dataTable">
+                                    <!--<thead>
+                                    <tr>
+                                        <th lay-data="{align:'center'}" colspan="2">人员属性</th>
+                                        <th lay-data="{align:'center'}" colspan="5">数据模块</th>
+                                        &lt;!&ndash;<th lay-data="{align:'center'}" colspan="10">客户信息</th>&ndash;&gt;
+                                        <th lay-data="{align:'center'}" colspan="3">业绩指标</th>
+                                        <th lay-data="{align:'center'}" colspan="6">过程指标</th>
+                                        &lt;!&ndash;<th lay-data="{align:'center'}" colspan="2">品质管理</th>&ndash;&gt;
+                                    </tr>
+                                    <tr>
+                                        &lt;!&ndash;<th lay-data="{field:'person_group', width:120,fixed: 'left'}">组别</th>&ndash;&gt;
+                                        <th lay-data="{type: 'numbers', width:120,fixed: 'left'}">组别</th>
+                                        <th lay-data="{field:'person_account', width:120,fixed:true}">坐席工号</th>
+
+                                        <th lay-data="{field:'data_source', width:120}">数据渠道</th>
+                                        <th lay-data="{field:'data_batch', width:150}">数据批次</th>
+                                        <th lay-data="{field:'data_importer', width:120}">导入人</th>
+                                        <th lay-data="{field:'data_import_time', width:200}">导入时间</th>
+                                        &lt;!&ndash;<th lay-data="{field:'data_status', width:120}">处理状态</th>&ndash;&gt;
+                                        <th lay-data="{field:'data_call_num', width:120}">总拨打次数</th>
+                                        &lt;!&ndash;<th lay-data="{field:'data_call_result', width:120}">拨打结果</th>&ndash;&gt;
+                                        &lt;!&ndash;<th lay-data="{field:'data_call_firsttime', width:120}">首次外呼时间</th>&ndash;&gt;
+                                        &lt;!&ndash;<th lay-data="{field:'data_submit_time', width:120}">提交时间</th>&ndash;&gt;
+                                        &lt;!&ndash;<th lay-data="{field:'data_type', width:120}">案件类型</th>&ndash;&gt;
+
+                                        &lt;!&ndash;<th lay-data="{field:'customer_name', width:120}">客户姓名</th>
+                                        <th lay-data="{field:'customer_sex', width:120}">性别</th>
+                                        <th lay-data="{field:'customer_phone', width:120}">手机</th>
+                                        <th lay-data="{field:'customer_city', width:120}">城市</th>
+                                        <th lay-data="{field:'customer_job_city', width:120}">工作城市</th>
+                                        <th lay-data="{field:'customer_havingother_card', width:120}">是否有他行卡</th>
+                                        <th lay-data="{field:'customer_card_usetime', width:120}">卡片使用时间</th>
+                                        <th lay-data="{field:'customer_education_background', width:120}">客户学历</th>
+                                        <th lay-data="{field:'customer_convenient_time', width:120}">方便联系时间</th>
+                                        <th lay-data="{field:'customer_other', width:120}">他有客群</th>&ndash;&gt;
+
+                                        <th lay-data="{field:'performance_get_nums', width:120}">名单领取量</th>
+                                        <th lay-data="{field:'performance_success_nums', width:120}">成功单</th>
+                                        <th lay-data="{field:'performance_success_rate', width:120}">成功率</th>
+
+                                        <th lay-data="{field:'total_call_second', width:120}">总通时</th>
+                                        <th lay-data="{field:'total_ring_second', width:120}">总振铃</th>
+                                        &lt;!&ndash;<th lay-data="{field:'process_avg_calltime', width:120}">平均通时</th>&ndash;&gt;
+                                        &lt;!&ndash;<th lay-data="{field:'process_ringtime', width:120}">振铃时长</th>&ndash;&gt;
+                                        <th lay-data="{field:'process_man_hour', width:120}">工时利用率</th>
+                                        <th lay-data="{field:'process_avg_answer', width:120}">平均接听量</th>
+                                        <th lay-data="{field:'process_avg_call', width:120}">平均外呼量</th>
+                                        <th lay-data="{field:'process_att', width:120}">ATT</th>
+
+                                        &lt;!&ndash;<th lay-data="{field:'quality_time', width:120}">质检时间</th>
+                                        <th lay-data="{field:'quality_account', width:120}">质检工号</th>&ndash;&gt;
+                                    </tr>
+                                    </thead>-->
+                                </table>
+                                <script type="text/html" id="operation">
+                                    <button class="layui-btn  layui-btn-default layui-btn-xs" lay-event="openCustom">详情</button>
+                                    <button class="layui-btn  layui-btn-default layui-btn-xs" lay-event="send_mail">转发</button>
+                                    <button class="layui-btn layui-btn-xs layui-btn-warm" lay-event="edit">修改</button>
+                                    <button class="layui-btn layui-btn-danger  layui-btn-xs" lay-event="delete">删除</button>
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="${ctxPath}/static/modular/custom/custom/data-report.js?v=123"></script>
+
+<!--<script src="${ctxPath}/static/js/plugins/xlsx/shim.js"></script>
+<script src="${ctxPath}/static/js/plugins/xlsx/xlsx.full.min.js"></script>-->
+
+<script>
+    $('.export').on("click", function () {
+        var beginTime = $('#beginTime').val();
+        var endTime = $('#endTime').val();
+        var account = $.trim($('#account').val());
+        var batch_no = $.trim($('#batch_no').val());
+
+        window.location.href=Feng.ctxPath + "/data-report/export-report" + "?account="+account+"&batch_no="+batch_no+"&beginTime="+beginTime+"&endTime="+endTime;
+        return false;
+    })
+</script>
+
+@}

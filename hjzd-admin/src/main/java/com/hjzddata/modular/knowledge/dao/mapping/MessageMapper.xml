@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjzddata.modular.knowledge.dao.MessageMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hjzddata.modular.knowledge.model.Message">
+        <id column="id" property="id" />
+        <result column="message" property="message" />
+        <result column="note" property="note" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="status" property="status" />
+        <result column="is_del" property="isDel" />
+    </resultMap>
+
+    <sql id="Table_Name">
+        hj_message
+    </sql>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, message, note, created_at, updated_at, status, is_del
+    </sql>
+
+    <select id="selectMessage" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+        select
+        <include refid="Base_Column_List" />
+        from
+        <include refid="Table_Name" />
+        where is_del = 0
+        <if test="part!=null and part!=''">
+            and message like CONCAT ('%', #{part} ,'%')
+        </if>
+        <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+            and (created_at between CONCAT(#{startTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        order by created_at desc
+    </select>
+
+    <update id="editStatus">
+        update
+        <include refid="Table_Name" />
+        set status = #{status}
+        where id =#{messageId}
+    </update>
+
+    <select id="messageList" resultType="Map">
+        select
+        id,message
+        from
+        <include refid="Table_Name" />
+        where
+        status = 1 and is_del = 0
+    </select>
+
+    <select id="messageExistence" resultType="Map">
+        select
+        id,message
+        from
+        <include refid="Table_Name" />
+        where
+        message = #{message} and is_del = 0
+        <if test="id !=null and id != ''">
+            and id != #{id}
+        </if>
+    </select>
+
+</mapper>

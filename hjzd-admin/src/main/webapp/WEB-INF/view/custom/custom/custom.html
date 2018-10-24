@@ -1,0 +1,160 @@
+@layout("/common/_container.html"){
+<style>
+    .m-top-5 {
+        margin-top: 5px;
+    }
+    .sp-input .layui-form-select {
+        width: unset;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>客户管理</h5>
+            </div>
+            <div class="ibox-content">
+                <form class="layui-form custom-input">
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline layui-col-md4 layui-col-sm-6" style="height: 37px">
+                            <div class="layui-input-inline" style="width: 33%;">
+                                <select name="key" lay-filter="key" id="search_column">
+                                    <option value="custom_name" selected>客户姓名</option>
+                                    <option value="phone" >手机号码</option>
+                                    <option value="contact_times">联系次数</option>
+                                    <option value="name">所属坐席</option>
+                                    <option value="batch_no">批次编号</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline resetInput" style="width: 60%">
+                                <input type="text" name="name" id="condition"  placeholder="下拉选择搜索条件" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                            <label class="layui-form-label" style="padding-left: 0">创建时间</label>
+                            <div class="layui-input-inline" >
+                                <input type="text" name="beginTime" id="beginTime" placeholder="开始时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                                <span class="layui-col-md1plus">-</span>
+                                <input type="text" name="endTime" id="endTime" placeholder="结束时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                            </div>
+                        </div>
+                        <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                            <label class="layui-form-label" style="padding-left: 0">更新时间</label>
+                            <div class="layui-input-inline" >
+                                <input type="text" name="update_beginTime" id="update_beginTime" placeholder="开始时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                                <span class="layui-col-md1plus">-</span>
+                                <input type="text" name="update_endTime" id="update_endTime" placeholder="结束时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                            </div>
+                        </div>
+
+
+                        <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                            <label class="layui-form-label" style="padding-left: 0px;">致电结果</label>
+                            <div class="layui-input-inline sp-input">
+                                <div style="display: initial;width: 49%;">
+                                    <select name="call_status_top" lay-verify="required" lay-search lay-filter='call-select' id="call_status_top">
+                                        <option value="-1">请选择</option>
+                                        @for(item in successCode){
+                                        <option value="${item.id}">${item.name}</option>
+                                        @}
+                                    </select>
+                                </div>
+
+                            <!--</div>-->
+
+                            <!--<div class="layui-input-inline sp-input call_status_Div" style="margin-right: 0;display: block">-->
+                                <div style="display: initial;width: 49%;" class="sp-input call_status_Div">
+                                    <select name="call_status_id" lay-verify="required" lay-search lay-filter='call-again'   id="call_status_id">
+
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                            <label class="layui-form-label" style="padding-left: 0">客户状态</label>
+                            <div class="layui-input-inline resetInput" style="width: 215px">
+                                <!--<#dictSelector id="status" name ="status" code="custom_allocate" readonly="readonly" placeholder="-请选择-" label="0"  underline="false" />-->
+                                <select name="status"  id="status">
+                                    <option value="-1">请选择</option>
+                                    <option value="0" selected>未分配</option>
+                                    <option value="2" >已分配</option>
+                                    <option value="4">回收</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                            <label class="layui-form-label" style="padding-left: 0">拨打状态</label>
+                            <div class="layui-input-inline resetInput" style="width: 215px">
+                                <!--<#dictSelector id="status" name ="status" code="custom_allocate" readonly="readonly" placeholder="-请选择-" label="0"  underline="false" />-->
+                                <select name="isCall"  id="isCall">
+                                    <option value="0" selected>请选择</option>
+                                    <option value="1">未拨打</option>
+                                    <option value="2" >已拨打</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center">
+                        <div>
+                            <button class=" layui-btn search-btn layui-btn-sm" table-id="userTable" data-type="reload" lay-filter="UserSearch">
+                                <i class="fa fa-search" style="font-size: 12px !important;"> </i>查询
+                            </button>
+                            <button class="layui-btn layui-btn-primary layui-btn-sm reset-btn" data-type="reset">重置</button>
+
+                            <button class="layui-btn layui-bg-green layui-btn-sm" id="create-custom">新增</button>
+                            <button class="layui-btn layui-bg-green layui-btn-sm" id="upload-custom">客户导入</button>
+                            <button class="layui-btn layui-bg-green layui-btn-sm" id="export-custom">导出</button>
+                            @if(shiro.hasPermission("/custom/custom_black_list")){
+                            <button class="layui-btn layui-bg-green layui-btn-sm" id="blackList">黑名单数据处理</button>
+                            @}
+                        </div>
+                    </div>
+                </form>
+                <div class="layui-row m-top-5">
+                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+                        <label class="layui-label">分案操作:</label>
+                        <button class="layui-btn layui-btn-xs case_button fast_batchOp1">快速分案</button>
+                        <button class="layui-btn layui-btn-xs case_button fast_batchAuto">快速自动分案</button>
+                        <button class="layui-btn layui-btn-xs search_case_button searchFast">查询结果快速分案</button>
+                        <button class="layui-btn layui-btn-xs search_case_button searchAuto">查询结果自动分案</button>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 m-top-5">
+                        <label class="layui-label">案件操作:</label>
+                        <button class="layui-btn layui-btn-xs case_button recycle">回收客户</button>
+                        <button class="layui-btn layui-btn-xs case_button del_case">删除客户</button>
+                        <button class="layui-btn layui-btn-xs case_button sendMsg">短信发送</button>
+                        <button class="layui-btn layui-btn-xs search_case_button searchSend">查询短信发送</button>
+                        <button class="layui-btn layui-btn-xs case_button batchMsg">批次短信</button>
+                        <button class="layui-btn layui-btn-xs search_case_button searchBatchMsg">查询批次短信</button>
+                    </div>
+                </div>
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <table class="layui-hide" id="CustomTable" lay-filter="custom"></table>
+                                <script type="text/html" id="operation">
+                                    <button class="layui-btn  layui-btn-default layui-btn-xs" lay-event="openCustom">详情</button>
+                                    <!--<button class="layui-btn  layui-btn-default layui-btn-xs" lay-event="send_mail">转发</button>-->
+                                    <button class="layui-btn layui-btn-xs layui-btn-warm" lay-event="edit">修改</button>
+                                    <button class="layui-btn layui-btn-danger  layui-btn-xs" lay-event="delete">删除</button>
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/js/jquery.table2excel.js"></script>
+<script src="${ctxPath}/static/modular/custom/custom/custom.js?v=123"></script>
+<!--<script src="http://oss.sheetjs.com/js-xlsx/tests/shim.js"></script>-->
+<!--<script src="http://oss.sheetjs.com/js-xlsx/tests/xlsx.full.min.js"></script>-->
+
+@}

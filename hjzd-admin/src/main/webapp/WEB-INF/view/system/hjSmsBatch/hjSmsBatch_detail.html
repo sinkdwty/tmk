@@ -1,0 +1,37 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+            <input type="hidden" id="id" value="${smsBatchId}">
+            <table class="layui-hide" id="itemsTable"></table>
+
+            <script>
+                layui.use('table', function(){
+                    var table = layui.table;
+                    table.render({
+                        elem: '#itemsTable'
+                        ,url: '/hjSmsBatch/query_detail/' + $('#id').val()
+                        ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                        ,cols: [[
+                            {title: '序号', type: 'numbers', align:'center',width:60},
+                            {field:'mobile', width:180, title: '手机号码'}
+                            ,{field:'errorcode', width:180, title: '发送状态'}
+                            ,{field:'receivetime', width:200, title: '送达时间'}
+                            ,{field:'taskid', title: '返回批次ID', width:100}
+                        ]],
+                        where: {order: 'desc'},
+                    });
+                });
+            </script>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10" style="text-align: center">
+                    <#button btnCss="danger" name="关闭" id="cancel" icon="fa-eraser" clickFun="HjSmsBatchInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/hjSmsBatch/hjSmsBatch_info.js"></script>
+@}

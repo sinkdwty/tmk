@@ -1,0 +1,167 @@
+
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>性别</span></label>
+                                    <div class="layui-input-block form-selelct sex">
+                                        <input type="text" name="sex" value="${aqItem.sex}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                    <div class="layui-input-block form-selelct sex-select isShow">
+                                        <select name="sex"  lay-filter='sex-select' id="sex">
+                                            <option value="男">男</option>
+                                            <option value="女">女</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>工作城市</span></label>
+                                    <div class="layui-input-block db-container">
+                                        <input type="text" name="jobCity" value="${aqItem.jobCity}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>公司名称</span></label>
+                                    <div class="layui-input-block db-container">
+                                        <input type="text" name="companyName" value="${aqItem.companyName}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>工作类型</span></label>
+                                    <div class="layui-input-block db-container">
+                                        <input type="text" name="jobType" value="${aqItem.jobType}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>持卡行</span></label>
+                                    <div class="layui-input-block db-container">
+                                        <input type="text" name="cardBank" value="${aqItem.cardBank}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>客户学历</span></label>
+                                    <div class="layui-input-block education form-selelct">
+                                        <input type="text" name="customEducationBackground" value="${aqItem.customEducationBackground}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                    <div class="layui-input-block education-select form-selelct isShow">
+                                        <select name="education" lay-filter="education-select" id="education">
+                                            <option value="">请选择</option>
+                                            <option value="硕士及以上">硕士及以上</option>
+                                            <option value="本科">本科</option>
+                                            <option value="大专">大专</option>
+                                            <option value="高中/技校/中专">高中/技校/中专</option>
+                                            <option value="初中及以下">初中及以下</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>毕业院校</span></label>
+                                    <div class="layui-input-block db-container">
+                                        <input type="text" name="graduateSchool" value="${aqItem.graduateSchool}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>申请卡种</span></label>
+                                    <div class="layui-input-block db-container">
+                                        <input type="text" name="applyCardType" value="${aqItem.applyCardType}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>拨打日期</span></label>
+                                    <div class="layui-input-block db-container">
+                                        <input type="text" name="address" value="${item.address}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>数据渠道</span></label>
+                                    <div class="layui-input-block db-container">
+                                        <input type="text" name="dataChannel" value="${aqItem.dataChannel}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>数据批次</span></label>
+                                    <div class="layui-input-block db-container">
+                                        <input type="text" name="dataBatch" value="${aqItem.dataBatch}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-65 tl" style="padding: 0 !important;"><span>他有客群</span></label>
+                                    <div class="layui-input-block db-container">
+                                        <input type="text" name="otherCustomers" value="${aqItem.otherCustomers}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-85 tl" style="padding: 0 !important;"><span>是否持有他行卡</span></label>
+                                    <div class="layui-input-block having-other-card" style="margin-left: 100px !important;">
+                                        <input type="text" name="havingOtherCard" value="${aqItem.havingOtherCard}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                    <div class="layui-input-block form-selelct having-other-card-select isShow" style="margin-left: 100px !important;">
+                                        <select name="havingOtherCard" lay-filter='having-other-card-select' id="having-other-card">
+                                            <option value="否">否</option>
+                                            <option value="是">是</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-85 tl" style="padding: 0 !important;"><span>卡片使用时间</span></label>
+                                    <div class="layui-input-block card-use-time" style="margin-left: 100px !important;">
+                                        <input type="text" name="cardUseTime" value="${aqItem.cardUseTime}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                    <div class="layui-input-block form-selelct card-use-time-select isShow" style="margin-left: 100px !important;">
+                                        <select name="cardUseTime"  lay-filter='card-use-time' id="card-use-time">
+                                            <option value="">请选择</option>
+                                            <option value="半年">半年</option>
+                                            <option value="一年">一年</option>
+                                            <option value="两年及以上">两年及以上</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-85 tl" style="padding: 0 !important;"><span>是否企业主股东</span></label>
+                                    <div class="layui-input-block is-corporat" style="margin-left: 100px !important;">
+                                        <input type="text" name="isCorporateShareholders" value="${aqItem.isCorporateShareholders}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                    <div class="layui-input-block form-selelct is-corporat-select isShow" style="margin-left: 100px !important;">
+                                        <select name="isCorporateShareholders" lay-filter='is-corporat-select' id="is-corporat">
+                                            <option value="否">否</option>
+                                            <option value="是">是</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs12 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label label-w-85 tl" style="padding: 0 !important;"><span>方便联系时间</span></label>
+                                    <div class="layui-input-block db-container" style="margin-left: 100px !important;">
+                                        <input type="text" name="convenientTime" value="${aqItem.convenientTime}" title="" class="layui-input no-b" readonly>
+                                    </div>
+                                </div>
+                            </div>

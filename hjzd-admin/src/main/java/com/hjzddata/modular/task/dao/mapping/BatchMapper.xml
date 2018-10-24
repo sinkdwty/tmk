@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjzddata.modular.task.dao.BatchMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hjzddata.modular.task.model.Batch">
+        <id column="id" property="id" />
+        <result column="product_id" property="productId" />
+        <result column="batch_no" property="batchNo" />
+        <result column="user_id" property="userId" />
+        <result column="file_path" property="filePath" />
+        <result column="import_num" property="importNum" />
+        <result column="created_at" property="createdAt" />
+        <result column="group_id" property="groupId" />
+        <result column="is_del" property="isDel" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, product_id, batch_no, user_id, file_path, import_num, created_at, group_id, is_del
+    </sql>
+
+    <select id="selectBatchs" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+        select
+        <include refid="Base_Column_List" />
+        from hj_batch b where is_del = 0
+        <if test="batch_no != null and batch_no != ''">
+            and (b.batch_no like CONCAT('%',#{batch_no},'%'))
+        </if>
+        <if test="product_id != null and product_id > 0">
+            and (b.product_id = #{product_id})
+        </if>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (b.created_at between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        order by b.created_at DESC
+    </select>
+</mapper>

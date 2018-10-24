@@ -1,0 +1,84 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>短信管理</h5>
+            </div>
+            <div class="ibox-content">
+
+                <form class="layui-form custom-input">
+                    <div class="layui-form-item">
+                        <div class="layui-inline layui-col-md4 layui-col-sm-6" style="height: 37px">
+                            <div class="layui-input-inline" style="width: 33%;">
+                                <select name="key" lay-filter="key" id="search_column">
+                                    <option value="sms_batch_name" selected>批次名称</option>
+                                    <option value="id">批次编号</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline resetInput" style="width: 60%">
+                                <input type="text" name="name" id="condition"  placeholder="下拉选择搜索条件" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                            <label class="layui-form-label" style="padding-left: 0">处理状态</label>
+                            <div class="layui-input-inline resetInput" style="width: 215px">
+                                <select name="status"  id="status">
+                                    <option value="-1" selected>请选择</option>
+                                    <option value="0">待发送</option>
+                                    <option value="1">预约待发送</option>
+                                    <option value="2">已发送</option>
+                                    <option value="3">处理成功</option>
+                                    <option value="4">处理失败</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-inline resetInput layui-col-md4 layui-col-sm-6">
+                            <label class="layui-form-label" style="padding-left: 0">创建时间</label>
+                            <div class="layui-input-inline ">
+                                <input type="text" name="beginTime" id="beginTime" placeholder="开始时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                                <span class="layui-col-md1plus">-</span>
+                                <input type="text" name="endTime" id="endTime" placeholder="结束时间" autocomplete="off" class="layui-input layui-col-md5plus time">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div style="text-align: center">
+                        <div class="hidden-xs" id="HjSmsBatchTableToolbar" role="group">
+                            <button class="layui-btn search-btn layui-btn-sm" table-id="HjSmsBatchTable" data-type="reload">
+                                <i class="fa fa-search" style="font-size: 12px !important;"> </i>查询
+                            </button>
+                            <button class="layui-btn search-btn layui-btn-sm" id="create-sms-batch">
+                                <i class="fa fa-search" style="font-size: 12px !important;"> </i>添加
+                            </button>
+
+                        </div>
+                    </div>
+                </form>
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <table class="layui-hide" id="HjSmsBatchTable" lay-filter="smsbatch"></table>
+                                <script type="text/html" id="operation">
+                                    <button class="layui-btn  layui-btn-default layui-btn-xs" lay-event="edit_sms">修改</button>
+                                    <!--<button class="layui-btn  layui-btn-default layui-btn-xs" lay-event="order_send">预约发送</button>-->
+                                    <button class="layui-btn  layui-btn-default layui-btn-xs" lay-event="now_send">发送短信</button>
+                                    <button class="layui-btn  layui-btn-xs layui-btn-warm" lay-event="send_detail">结果查看</button>
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/hjSmsBatch/hjSmsBatch.js"></script>
+<script src="${ctxPath}/static/js/jquery.table2excel.js"></script>
+<script src="http://oss.sheetjs.com/js-xlsx/tests/shim.js"></script>
+<script src="http://oss.sheetjs.com/js-xlsx/tests/xlsx.full.min.js"></script>
+@}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjzddata.modular.task.dao.ProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hjzddata.modular.task.model.Product">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="status" property="status" />
+        <result column="base_id" property="baseId" />
+        <result column="is_del" property="isDel" />
+        <result column="created_at" property="createAt" />
+        <result column="updated_at" property="updateAt" />
+        <result column="created_ip" property="createIp" />
+        <result column="updated_ip" property="updateIp" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        p.id, p.name,p.base_id, p.status, p.is_del AS isDel, p.created_at AS createAt, p.updated_at AS updateAt, p.created_ip AS createIp, p.updated_ip AS updateIp, b.fullname as baseName
+    </sql>
+
+    <sql id="Base_Column_List_For_Validate">
+		id, name
+	</sql>
+
+    <select id="selectProducts" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+        select
+        <include refid="Base_Column_List" />
+        from sys_product p
+        left join sys_dept b
+        on p.base_id = b.id
+        where p.is_del = 0
+        <if test="name != null and name != ''">
+            and (p.name like CONCAT('%',#{name},'%'))
+        </if>
+        <if test="beginTime != null and beginTime != '' and endTime != null and endTime != ''">
+            and (p.created_at between CONCAT(#{beginTime},' 00:00:00') and CONCAT(#{endTime},' 23:59:59'))
+        </if>
+        <if test="product_id != null and product_id > 0">
+            and p.id = #{product_id}
+        </if>
+        order by p.created_at DESC
+    </select>
+
+    <select id="getByName" resultType="product">
+        select
+        <include refid="Base_Column_List_For_Validate" />
+        from sys_product where name = #{name} and is_del != 1
+    </select>
+
+    <update id="setStatus">
+		update sys_product set status = #{status} where id =
+		#{id}
+	</update>
+
+</mapper>

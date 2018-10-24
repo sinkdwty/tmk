@@ -1,0 +1,44 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>媒体管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#NameCon id="name" name="媒体名称" />
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button" style="float: left;">
+                                            媒体类型
+                                        </button>
+                                        <#dictSelector id="category" name ="category" code="media"  placeholder="-请选择-" width="auto"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <#button name="搜索" icon="fa-search" clickFun="Media.search()"/>
+                                <#button name="重置" icon="fa-power-off" clickFun="Media.reset()"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="MediaTableToolbar" role="group">
+                            @if(shiro.hasPermission("/media/add")){
+                                <#button name="添加" icon="fa-plus" clickFun="Media.openAddMedia()"/>
+                            @}
+                        </div>
+                        <#table id="MediaTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/task/media/media.js"></script>
+@}

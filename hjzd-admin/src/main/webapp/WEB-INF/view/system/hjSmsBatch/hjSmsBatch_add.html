@@ -1,0 +1,66 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <form action="" id="smsForm">
+    <div class="layui-form" action="" id="smsBatchForm">
+        <div class="ibox-content">
+            <div class="form-horizontal">
+                <div class="col-sm-6 b-r">
+                    <#input id="smsBatchName" name="批次名称" underline="true"/>
+                    <#input id="batchDesc" name="批次描述" underline="true"/>
+                    <!-- 批次发送类型 0-待发送 1-预约发送 -->
+                    <#textarea name="短信内容" class="form-control" id="smsContent" underline="true" rows="1"></#textarea>
+                    <#textarea name="手机号码" class="form-control" id="phones" underline="true" rows="2"></#textarea>
+                </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="col-sm-3 control-label"> 发送类型</label>
+                <div class="col-sm-9">
+                    <select name="status" id="status" lay-filter='send-select'>
+                        <option value="-1">请选择</option>
+                        <option value="0">待发送</option>
+                        <option value="1">预约发送</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="reserveDiv" style="display: none">
+                <div class="layui-form-item " style="margin-left: 10px !important;">
+                    <#input type="text" name="预约时间" style="width: 150px;" class="layui-input" id="reserveTime" underline="true" placeholder="请选择预约时间"/>
+                </div>
+            </div>
+
+
+            <div class="layui-form-item" style="padding-left: 10px;">
+                <#select name="短信模板" lay-filter='SmsModel' id="SmsModel" underline="true">
+                    <option value="">请选择</option>
+                @for(list in selectList){
+                    <option value="${list.id}">${list.message}</option>
+                @}
+                </#select>
+            </div>
+
+
+            <div class="layui-form-item" style="padding-left: 10px;">
+                <#select name="批次容量" id="batchCapacity" underline="true">
+                    <option value="-1">请选择</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="300">300</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                </#select>
+            </div>
+
+        </div>
+</div>
+
+<div class="row btn-group-m-t">
+    <div class="col-sm-10" style="text-align: center">
+        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="HjSmsBatchInfoDlg.addSubmit()"/>
+    </div>
+</div>
+</form>
+</div>
+<script src="${ctxPath}/static/modular/system/hjSmsBatch/hjSmsBatch_info.js"></script>
+@}

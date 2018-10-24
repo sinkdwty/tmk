@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjzddata.modular.system.dao.HjSmsBatchMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hjzddata.modular.system.model.HjSmsBatch">
+        <id column="id" property="id" />
+        <result column="sms_batch_name" property="smsBatchName" />
+        <result column="batch_desc" property="batchDesc" />
+        <result column="create_at" property="createAt" />
+        <result column="sms_content" property="smsContent" />
+        <result column="batch_capacity" property="batchCapacity" />
+        <result column="left_capacity" property="leftCapacity" />
+        <result column="status" property="status" />
+        <result column="send_note" property="sendNote" />
+        <result column="success_sms" property="successSms" />
+        <result column="failure_sms" property="failureSms" />
+        <result column="userid" property="userid" />
+        <result column="result_text" property="resultText" />
+        <result column="result_detail" property="resultDetail" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, sms_batch_name, batch_desc, create_at, sms_content, batch_capacity, left_capacity, status, send_note, success_sms, failure_sms, userid, result_text, result_detail
+    </sql>
+
+
+    <select id="selectHjSmsBatchList" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+        select <include refid="Base_Column_List"/> from hj_sms_batch s
+        where 1=1
+
+        <if test="beginTime != null and beginTime !=''">
+            and s.create_at <![CDATA[>=]]> "${beginTime} 00:00:00"
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and s.create_at <![CDATA[<=]]> "${endTime} 23:59:59"
+        </if>
+
+        <if test="condition != null and condition !='' and column != null and column !=''">
+            <choose>
+                <when test="column == 'sms_batch_name'">
+                    and s.${column} like CONCAT('%',#{condition},'%')
+                </when>
+                <when test="column == 'id'">
+                    and s.${column} = #{condition}
+                </when>
+                <otherwise>
+                    and s.${column} like CONCAT('%',#{condition},'%')
+                </otherwise>
+            </choose>
+        </if>
+
+        <if test="status != null and status >= 0">
+            and s.status = #{status}
+        </if>
+        <if test="way != null and way == 'msg'">
+            and s.status in(0,1,5)
+        </if>
+
+        <choose>
+            <when test="orderByField != null and orderByField !=''">
+                <choose>
+                    <when test="isAsc == true">
+                        order by ${orderByField} ASC
+                    </when>
+                    <otherwise>
+                        order by ${orderByField} DESC
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                order by create_at DESC
+            </otherwise>
+        </choose>
+
+
+    </select>
+
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjzddata.modular.goods.dao.GoodsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hjzddata.modular.goods.model.Goods">
+        <id column="id" property="id" />
+        <result column="goods_name" property="goodsName" />
+        <result column="stock_num" property="stockNum" />
+        <result column="pic_url" property="picUrl" />
+        <result column="url" property="url" />
+        <result column="batch_no" property="batchNo" />
+        <result column="category_no" property="categoryNo" />
+        <result column="note" property="note" />
+        <result column="goods_note" property="goodsNote" />
+        <result column="is_sale" property="isSale" />
+        <result column="is_del" property="isDel" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, goods_name AS goodsName, goods_price AS goodsPrice, stock_num AS stockNum, pic_url AS picUrl, url, batch_no AS batchNo, category_no AS categoryNo, note, goods_note AS goodsNote, is_sale AS isSale, is_del AS isDel, created_at AS createdAt, updated_at AS updatedAt
+    </sql>
+    <insert id="importGoods">
+     insert into hj_goods
+     (goods_name,goods_price,stock_num,url,note,goods_note,batch_no,created_at,updated_at)
+     values
+     (#{goodsName},#{goodsPrice},#{stockNum},#{url},#{note},#{goodsNote},#{batchNo},#{createdAt},#{updatedAt})
+
+    </insert>
+
+    <select id="getGoods" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+        select <include refid="Base_Column_List"/> from hj_goods where 1 = 1 and is_del=0
+        <if test="goodsname != null and goodsname !=''">
+            and goods_name like CONCAT('%',#{goodsname},'%')
+        </if>
+        <if test="isSale != null and isSale != 3">
+            and is_sale = #{isSale}
+        </if>
+        <choose>
+            <when test="orderByField != null and orderByField !=''">
+                <choose>
+                    <when test="isAsc == true">
+                        order by ${orderByField} ASC
+                    </when>
+                    <otherwise>
+                        order by ${orderByField} DESC
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                order by created_at DESC
+            </otherwise>
+        </choose>
+    </select>
+</mapper>

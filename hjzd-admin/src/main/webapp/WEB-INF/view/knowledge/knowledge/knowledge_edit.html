@@ -1,0 +1,63 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="knowledgeInfoForm">
+
+            <input type="hidden" id="id" value="${item.id}">
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#input id="name" name="<i style='color: red'>*</i> 知识名称" value="${item.name}" underline="true"/>
+                    <#input id="keyWord" name="关键词" value="${item.keyWord}" underline="true" placeholder="多个关键词英文逗号,隔开"/>
+                    <!--<#input id="accessory" name="附件" underline="true"/>-->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">附件</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" id="accessory" name="accessory" type="hidden">
+                            <button type="button" class="btn btn-primary " id="uploadAccessory">
+                                <i class="fa fa-upload"></i>&nbsp;上传附件
+                            </button>
+                            <span id="show_file">${item.accessory}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <#dictSelector id="category" name ="category" code="knowledge" value="${item.category}" label="<i style='color: red'>*</i> 知识分类"  underline="true" placeholder="-请选择-" />
+
+                    <#select id="status" name="知识状态" underline="true" >
+                        <option value="1"
+                                @if (item.status == 1) {
+                                    selected='true'
+                                @}
+                            >发布</option>
+                        <option value="0"
+                                @if (item.status == 0) {
+                                    selected='true'
+                                @}
+                            >未发布</option>
+                    </#select>
+                </div>
+            </div>
+        <div style="display: none"  id="content_val">${item.content}</div>
+        <div class="col-sm-11" style="margin-left: 9%;">
+            <script id="editor" type="text/plain" style="height:300px;margin: 0 auto;"></script>
+        </div>
+        <!--<script id="editor" type="text/plain" style="height:300px;margin: 0 auto;"></script>-->
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-12" style="text-align:center">
+                    <!--<#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="KnowledgeInfoDlg.editSubmit()"/>-->
+                    <!--<#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="KnowledgeInfoDlg.close()"/>-->
+                    <button class="layui-btn layui-btn-sm" id="ensure" onclick="KnowledgeInfoDlg.editSubmit()">提交</button>
+                    <button class="layui-btn layui-btn-sm layui-btn-primary" id="cancel" onclick="KnowledgeInfoDlg.close()">取消</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/js/ueditor/ueditor.config.js"></script>
+<script src="${ctxPath}/static/js/ueditor/ueditor.all.js"></script>
+<script src="${ctxPath}/static/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script src="${ctxPath}/static/modular/knowledge/knowledge/knowledge_info.js"></script>
+@}

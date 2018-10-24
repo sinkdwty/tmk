@@ -1,0 +1,84 @@
+@layout("/common/_container.html"){
+<div class="">
+    <fieldset class="layui-elem-field">
+        <legend>设置致电结果状态</legend>
+        <div style="padding: 15px;">
+            <ul id="code_tree" class="ztree"></ul>
+            <div style="display: none" id="items"></div>
+            <br>
+            <button class="layui-btn layui-btn-xs btn-check-all">全选</button>
+            <button class="layui-btn layui-btn-xs layui-btn-danger btn-uncheck-all">全不选</button>
+            <button class="layui-btn layui-btn-xs btn-save">保存</button>
+        </div>
+    </fieldset>
+</div>
+<script>
+    $(function() {
+        createTree(Feng.ctxPath + "/product/get-all-code", "#code_tree"); //创建
+        setTimeout(function () {
+            var treeObj = $.fn.zTree.getZTreeObj("code_tree");
+            //默认展示
+            var codeList = '${codeList}';
+            if (codeList != "") {
+                codeList = JSON.parse(codeList);
+                $.each(codeList, function (k, v) {
+                    var node = treeObj.getNodeByParam("id",v.callStatusId);
+                    // treeObj.selectNode(node, true);//指定选中ID的节点
+                    // treeObj.checkNode(node, true, true);
+                    node.checked = true;
+                    treeObj.updateNode(node);
+                    treeObj.expandNode(node, true, false);//指定选中ID节点展开
+                })
+            }
+
+            /* 全选 */
+            $('.btn-check-all').on('click', function () {
+                treeObj.checkAllNodes(true);
+            });
+
+            /* 全不选 */
+            $('.btn-uncheck-all').on('click', function () {
+                treeObj.checkAllNodes(false);
+            });
+
+            /* 保存 */
+            $('.btn-save').on('click',function () {
+                var that = $(this);
+
+                var ids = [];
+                var nodes = treeObj.getCheckedNodes(true);
+                for(var i=0;i<nodes.length;i++){
+                    ids.push(nodes[i].id);
+                }
+                if (ids.length == 0) {
+                    layer.msg("请先选择致电结果！", {icon: 2});
+                    return false;
+                }
+                $.ajax({
+                    url:Feng.ctxPath + "/product/save-all-code",
+                    data:{'items[]':ids, productId : '${productId}'},
+                    type:'POST',
+                    dataType:'json',
+                    success:function (res) {
+                        if(res.code == 200){
+                            layer.msg(res.message, {icon: 1});
+                            setTimeout(function () {
+                                window.parent.layer.closeAll();
+                            },1000);
+                        }else{
+                            layer.msg(res.message, {icon: 2});
+                        }
+                        that.attr("disabled", false);
+                    },
+                    error:function (error) {
+
+                    }
+                });
+
+            })
+        }, 1000)
+    }) ;
+
+
+</script>
+@}

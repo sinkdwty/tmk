@@ -1,0 +1,26 @@
+@layout("/common/_container.html"){
+<style>
+    .tips {
+        font-size: 14px;
+    }
+</style>
+<div class="layui-card">
+    <div class="layui-card-header">
+        <button type="button" class="layui-btn" id="goodsUpload">
+            <i class="layui-icon">&#xe67c;</i>上传商品
+        </button>
+        <a style="margin-left: 10px; text-decoration: underline" href="/goods/download-tpl?fileName=goods_import.xls">没有上传的模版？点击下载模版</a>
+    </div>
+    <div class="layui-card-body">
+        系统仅支持 xls、xlsx 格式
+    </div>
+</div>
+<blockquote class="layui-elem-quote tips">
+        xls模板使用引导：<br>
+    1、适用范围：本模板适用于批量上传商品。<br>
+    2、模板第一行列名不要随意修改，否则可能会上传失败。<br>
+    3、表格中“商品名称”和“商品价格”不能为空,“库存”必须是整数。<br>
+    4、表格尽量不要重复使用，否则可能会导致表格内容格式错误。<br>
+</blockquote>
+<script src="${ctxPath}/static/modular/goods/goods/goods_info.js"></script>
+@}

@@ -1,0 +1,50 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="goodsInfoForm">
+
+            <input type="hidden" id="id" value="${item.id}">
+            <input type="hidden" id="goodsIsSale" value="${item.isSale}">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <!--<#input id="id" name="商品id" value="${item.id}" underline="true"/>-->
+                    <#input id="goodsName" name="<i style='color: red;'>*</i> 商品名称" value="${item.goodsName}" underline="true"/>
+                    <#input id="stockNum" name="库存量" value="${item.stockNum}" underline="true"/>
+                    <#input id="url" name="商品链接" value="${item.url}" underline="true"/>
+                    <!--<#input id="batchNo" name="批次编号" value="${item.batchNo}" underline="true"/>-->
+                    <!--<#goodsPic id="picUrl" name="图片地址" underline="true"/>-->
+                    <#goodsPic id="picUrl" name="商品图片" underline="true" avatarImg="${item.picUrl}"/>
+                </div>
+
+                <div class="col-sm-6">
+                    <#input id="goodsPrice" name="商品价格" value="${item.goodsPrice}" underline="true"/>
+                    <#input id="note" name="备注" value="${item.note}" underline="true"/>
+                    <#input id="goodsNote" name="商品备注" value="${item.goodsNote}" underline="true"/>
+                    <#select id="isSale" name="上下架" underline="true">
+                        <option value="1">上架</option>
+                        <option value="0">下架</option>
+                    </#select>
+                    <!--<#select id="isDel" name="是否删除" underline="true">-->
+                        <!--<option value="1">是</option>-->
+                        <!--<option value="0">否</option>-->
+                    <!--</#select>-->
+                    
+                    <!--<#input id="isSale" name="是否在架，1上架，0下架" value="${item.isSale}" underline="true"/>-->
+                    <!--<#input id="isDel" name="是否删除，1是，0否" value="${item.isDel}" underline="true"/>-->
+                    <!--<#input id="categoryNo" name="商品分类" value="${item.categoryNo}" />-->
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-12" style="text-align: center">
+                    <button class="layui-btn layui-btn-sm" id="ensure" onclick="GoodsInfoDlg.editSubmit()">提交</button>
+                    <button class="layui-btn layui-btn-sm layui-btn-primary" id="cancel" onclick="GoodsInfoDlg.close()">取消</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/goods/goods/goods_info.js"></script>
+@}

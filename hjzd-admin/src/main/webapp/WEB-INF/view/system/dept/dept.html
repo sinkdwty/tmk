@@ -1,0 +1,58 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>公司管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <!--<div class="row">-->
+                            <!--<div class="col-sm-3">-->
+                                <!--<#NameCon id="condition" name="名称" />-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-3">-->
+                                <!--<#button name="搜索" icon="fa-search" clickFun="Dept.search()"/>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!--<#table id="DeptTable"/>-->
+                        <div class="layui-form global m-top-20 title-sorts">
+                            <div class="layui-row height-container">
+                                <div class="layui-col-xs12 layui-col-sm6 layui-col-md4" style="min-width: 25%;">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label" style="width: 100px">公司名称:</label>
+                                        <div class="layui-input-block">
+                                            <input class="layui-input" maxlength="50" name="custom_name" id="custom_name" placeholder="请输入公司简称/全称">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-row ">
+                                <div class="layui-col-xs12 layui-col-sm12 layui-col-md12" style="text-align: center">
+                                    <button class=" layui-btn search-btn layui-btn-sm" table-id="deptTable" data-type="reload"
+                                            lay-filter="deptSearch">
+                                        <i class="fa fa-search" style="font-size: 12px !important;"> </i>搜索
+                                    </button>
+                                    <button class="layui-btn layui-btn-primary layui-btn-sm" id="searchReset" data-type="reset">重置</button>
+                                    <button class="layui-btn layui-bg-green layui-btn-sm" id="create-dept">添加公司</button>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="layui-hide" id="deptManagerTable" lay-filter="demo"></table>
+                        <script type="text/html" id="operation">
+                            <button class="layui-btn layui-btn-xs" lay-event="edit">修改</button>
+                            <button class="layui-btn layui-btn-danger  layui-btn-xs" lay-event="delete">删除</button>
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="${ctxPath}/static/js/layui/layui.js"></script>
+<!--<link  href="${ctxPath}/static/js/layui/css/layui.css">-->
+<link href="${ctxPath}/static/js/layui/css/layui.css" rel="stylesheet">
+<script type="text/javascript" src="${ctxPath}/static/modular/system/dept/dept.js"></script>
+@}

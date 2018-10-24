@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjzddata.modular.knowledge.dao.KnowledgeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hjzddata.modular.knowledge.model.Knowledge">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="key_word" property="keyWord" />
+        <result column="category" property="category" />
+        <result column="status" property="status" />
+        <result column="content" property="content" />
+        <result column="accessory" property="accessory" />
+        <result column="is_del" property="isDel" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="created_ip" property="createdIp" />
+        <result column="updated_ip" property="updatedIp" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, key_word, category, status, content, accessory, is_del, created_at, updated_at, created_ip, updated_ip
+    </sql>
+
+    <select id="selectKnowledges" resultType="map" parameterType="com.baomidou.mybatisplus.plugins.Page">
+        select k.*  from hj_knowledge k  where k.is_del=0
+        <if test="key_word!=null and key_word!='' and column != null and column !=''">
+            and k.${column} like CONCAT ('%', #{key_word} ,'%')
+        </if>
+        <if test="category!=null and category!=''">
+            and k.category = #{category}
+        </if>
+        order by k.id desc
+    </select>
+    <select id="knowledgeExistence" resultType="Map">
+        select
+        id,name
+        from
+        hj_knowledge
+        where
+        name = #{name}  and is_del = 0
+        <if test="id != null and id != ''">
+            and id !=#{id}
+        </if>
+    </select>
+
+</mapper>
